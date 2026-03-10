@@ -29,12 +29,14 @@
 import UnderLine from '@/components/under-line.vue'
 import { onMounted, ref } from 'vue'
 
-const list = ref<{
-  id: number
-  logTime: string
-  description: string
-  otherText: string
-}[]>([])
+const list = ref<
+  {
+    id: number
+    logTime: string
+    description: string
+    otherText: string
+  }[]
+>([])
 
 const DetermineScreenWidth = ref<boolean>(false)
 onMounted(async () => {

@@ -47,7 +47,12 @@ onMounted(async () => {
     if (!response.ok) {
       throw new Error('Network response was not ok')
     }
-    list.push(...(await response.json()).map((item: { pic: string | URL }) => ({ ...item, pic: new URL(item.pic, import.meta.url).href })))
+    list.push(
+      ...(await response.json()).map((item: { pic: string | URL }) => ({
+        ...item,
+        pic: new URL(item.pic, import.meta.url).href,
+      })),
+    )
   } catch (error) {
     console.error('Failed to fetch work.json:', error)
   }
