@@ -28,20 +28,26 @@
 // 引入under-line组件
 import UnderLine from '@/components/under-line.vue'
 import { onMounted, ref } from 'vue'
-import infoJson from '@/assets/json/info.json'
 
-const list = ref<
-  {
-    id: number
-    logTime: string
-    description: string
-    otherText: string
-  }[]
->([])
+const list = ref<{
+  id: number
+  logTime: string
+  description: string
+  otherText: string
+}[]>([])
 
 const DetermineScreenWidth = ref<boolean>(false)
-onMounted(() => {
-  list.value = infoJson
+onMounted(async () => {
+  try {
+    const response = await fetch('/json/info.json')
+    if (!response.ok) {
+      throw new Error('Network response was not ok')
+    }
+    list.value = await response.json()
+  } catch (error) {
+    console.error('Failed to fetch info.json:', error)
+  }
+
   // 判断屏幕宽度
   if (document.documentElement.clientWidth < 1200) {
     DetermineScreenWidth.value = false

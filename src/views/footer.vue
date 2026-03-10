@@ -19,32 +19,46 @@
       <br />
       <a href="https://weibo.com/7269276678" target="_blank">我的微博</a>
       <br />
-      <a href="https://woyuxaiji.top/" target="_blank">我与夏季--旧版</a>
-      <br />
       <a href="https://space.bilibili.com/340928373" target="_blank">我的哔哩哔哩频道</a>
     </div>
     <div class="footer__Item copyright">
       <p>© 2022 刘亮</p>
       <a id="linkCopyright">版权声明</a>
       <br />
-      <a href="https://woyuxaiji.top/" target="_blank" class="old">我与夏季--旧版</a>
       <a href="#" class="pentagram">☆☆☆☆☆</a>
       <br />
-      <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2022024233号-6</a>
+      <a :href="footerInfo.icp.url" target="_blank">{{ footerInfo.icp.text }}</a>
       <br />
       <span class="beian">
-        <img src="@/assets/images/beian.png" />
-        <a
-          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41172102000222"
-          target="_blank"
-          >豫公网安备 41172102000222号</a
-        >
+        <img src="@/assets/images/beian.png" alt="豫公网安备" class="beian__Img" />
+        <a :href="footerInfo.beian.url" target="_blank">{{ footerInfo.beian.text }}</a>
       </span>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted, reactive } from 'vue'
+
+const footerInfo = reactive({
+  icp: { text: '', url: '' },
+  beian: { text: '', url: '' },
+})
+
+onMounted(async () => {
+  try {
+    const response = await fetch('/json/footer.json')
+    if (!response.ok) {
+      throw new Error('Network response was not ok')
+    }
+    const data = await response.json()
+    footerInfo.icp = data.icp
+    footerInfo.beian = data.beian
+  } catch (error) {
+    console.error('Failed to fetch footer.json:', error)
+  }
+})
+</script>
 
 <style lang="scss" scoped>
 #footer {
@@ -77,9 +91,11 @@
       }
       .beian {
         text-align: start;
-        img {
+
+        .beian__Img {
           display: inline-block;
           vertical-align: sub;
+          margin-right: 5px;
         }
       }
     }

@@ -27,7 +27,6 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue'
 import UnderLine from '@/components/under-line.vue'
-import workJson from '@/assets/json/work.json'
 
 // 请求作品列表
 const list = reactive<
@@ -42,8 +41,16 @@ const list = reactive<
 >([])
 
 // 页面挂载前请求作品列表
-onMounted(() => {
-  list.push(...workJson.map((item) => ({ ...item, pic: new URL(item.pic, import.meta.url).href })))
+onMounted(async () => {
+  try {
+    const response = await fetch('/json/work.json')
+    if (!response.ok) {
+      throw new Error('Network response was not ok')
+    }
+    list.push(...(await response.json()).map((item: { pic: string | URL }) => ({ ...item, pic: new URL(item.pic, import.meta.url).href })))
+  } catch (error) {
+    console.error('Failed to fetch work.json:', error)
+  }
 })
 </script>
 
