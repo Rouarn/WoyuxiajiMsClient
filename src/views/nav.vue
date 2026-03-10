@@ -1,10 +1,10 @@
 <template>
   <nav :class="{ active: navActive }">
     <div class="nav">
-      <div class="nav__logo" @click="() => $router.push('/')">
-        <img src="@/assets/Logo_Main_2108.svg" alt="logo" ref="Logo_Main" />
-        <img src="@/assets/Logo_Text_2108.svg" alt="logo" ref="Logo_Text" />
-      </div>
+      <a class="nav__logo" href="#">
+        <img src="@/assets/images/Logo_Main_2108.svg" alt="logo" ref="Logo_Main" />
+        <img src="@/assets/images/Logo_Text_2108.svg" alt="logo" ref="Logo_Text" />
+      </a>
       <div class="switch" @click.stop="IsMove" :class="{ active: IsMoveShow }"></div>
       <div class="nav__menu" @click.stop="">
         <ul @click.stop="">
@@ -14,7 +14,7 @@
           <li @click.stop=""><a href="#info">日志</a></li>
           <li @click.stop="topicSwitching">
             <a>
-              <img src="@/assets/TB-Tom-sun.svg" alt="sum" ref="sum" />
+              <img src="@/assets/images/TB-Tom-sun.svg" alt="sum" ref="sum" />
             </a>
           </li>
         </ul>
@@ -25,12 +25,12 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
-import logoMain2208 from '@/assets/Logo_Main_2208.svg'
-import logoText2208 from '@/assets/Logo_Text_2208.svg'
-import logoMain2108 from '@/assets/Logo_Main_2108.svg'
-import logoText2108 from '@/assets/Logo_Text_2108.svg'
-import moonIcon from '@/assets/TB-Jerry-moon.svg'
-import sunIcon from '@/assets/TB-Tom-sun.svg'
+import logoMain2208 from '@/assets/images/Logo_Main_2208.svg'
+import logoText2208 from '@/assets/images/Logo_Text_2208.svg'
+import logoMain2108 from '@/assets/images/Logo_Main_2108.svg'
+import logoText2108 from '@/assets/images/Logo_Text_2108.svg'
+import moonIcon from '@/assets/images/TB-Jerry-moon.svg'
+import sunIcon from '@/assets/images/TB-Tom-sun.svg'
 // 移动端导航栏效果
 const IsMoveShow = ref(false)
 const IsMove = () => {

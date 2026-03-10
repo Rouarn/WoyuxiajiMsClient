@@ -71,7 +71,7 @@ onMounted(() => {
   width: 100%;
   height: 100vh;
   position: relative;
-  background: url('@/assets/background28.jpg') no-repeat center/cover;
+  background: url('@/assets/images/background28.jpg') no-repeat center/cover;
   .topTitle {
     position: absolute;
     top: 35%;

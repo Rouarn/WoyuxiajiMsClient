@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, onUnmounted } from 'vue'
-import sakuraImgSrc from '@/assets/blinkingCursor.png'
+import sakuraImgSrc from '@/assets/images/blinkingCursor.png'
 
 export default defineComponent({
   name: 'SakuraFalling',

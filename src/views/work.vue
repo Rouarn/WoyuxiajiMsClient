@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue'
 import UnderLine from '@/components/under-line.vue'
-import background28 from '@/assets/background28.jpg'
+import background28 from '@/assets/images/background28.jpg'
 
 // 请求作品列表
 const list = reactive<

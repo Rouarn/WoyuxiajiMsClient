@@ -33,7 +33,7 @@
       <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2022024233号-6</a>
       <br />
       <span class="beian">
-        <img src="@/assets/beian.png" />
+        <img src="@/assets/images/beian.png" />
         <a
           href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41172102000222"
           target="_blank"
@@ -50,7 +50,7 @@
 #footer {
   width: 100%;
   height: 300px;
-  background: url('@/assets/footer_background01.jpg') no-repeat center/cover;
+  background: url('@/assets/images/footer_background01.jpg') no-repeat center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
