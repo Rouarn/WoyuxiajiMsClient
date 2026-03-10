@@ -14,7 +14,6 @@
         <img :src="item.pic" :alt="item.title" />
         <div class="workLinkText">
           <div class="workLinkTextTitle">
-
             <h2>{{ item.title }}</h2>
             <p>{{ item.platform }}</p>
           </div>
@@ -28,7 +27,7 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue'
 import UnderLine from '@/components/under-line.vue'
-import background28 from '@/assets/images/background28.jpg'
+import workJson from '@/assets/json/work.json'
 
 // 请求作品列表
 const list = reactive<
@@ -40,26 +39,12 @@ const list = reactive<
     Introduce: string
     url: string
   }[]
->([
-  {
-    id: 1,
-    title: '作品1',
-    pic: background28,
-    platform: '平台1',
-    Introduce: '这是我的作品1',
-    url: 'https://www.baidu.com',
-  },
-  {
-    id: 2,
-    title: '作品2',
-    pic: background28,
-    platform: '平台2',
-    Introduce: '这是我的作品2',
-    url: 'https://www.baidu.com',
-  },
-])
+>([])
+
 // 页面挂载前请求作品列表
-onMounted(() => {})
+onMounted(() => {
+  list.push(...workJson.map((item) => ({ ...item, pic: new URL(item.pic, import.meta.url).href })))
+})
 </script>
 
 <style lang="scss" scoped>

@@ -28,60 +28,20 @@
 // 引入under-line组件
 import UnderLine from '@/components/under-line.vue'
 import { onMounted, ref } from 'vue'
+import infoJson from '@/assets/json/info.json'
 
-const list = ref([
+const list = ref<
   {
-    id: 1,
-    logTime: '2022-01-01',
-    description: '小站建立',
-    otherText: '一个平平无奇的开始',
-  },
-  {
-    id: 2,
-    logTime: '2022-01-02',
-    description: '小站升级',
-    otherText: '加入了新的功能',
-  },
-  {
-    id: 3,
-    logTime: '2022-01-03',
-    description: '小站升级',
-    otherText: '加入了新的功能',
-  },
-  {
-    id: 4,
-    logTime: '2022-01-04',
-    description: '小站升级',
-    otherText: '加入了新的功能',
-  },
-  {
-    id: 5,
-    logTime: '2022-01-05',
-    description: '小站升级',
-    otherText: '加入了新的功能',
-  },
-  {
-    id: 6,
-    logTime: '2022-01-06',
-    description: '小站升级',
-    otherText: '加入了新的功能',
-  },
-  {
-    id: 7,
-    logTime: '2022-01-07',
-    description: '小站升级',
-    otherText: '加入了新的功能',
-  },
-  {
-    id: 8,
-    logTime: '2022-01-08',
-    description: '小站升级',
-    otherText: '加入了新的功能',
-  },
-])
+    id: number
+    logTime: string
+    description: string
+    otherText: string
+  }[]
+>([])
 
 const DetermineScreenWidth = ref<boolean>(false)
 onMounted(() => {
+  list.value = infoJson
   // 判断屏幕宽度
   if (document.documentElement.clientWidth < 1200) {
     DetermineScreenWidth.value = false

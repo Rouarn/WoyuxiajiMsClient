@@ -71,7 +71,8 @@ onMounted(() => {
   width: 100%;
   height: 100vh;
   position: relative;
-  background: url('@/assets/images/background28.jpg') no-repeat center/cover;
+  background: url('https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN')
+    no-repeat center/cover;
   .topTitle {
     position: absolute;
     top: 35%;

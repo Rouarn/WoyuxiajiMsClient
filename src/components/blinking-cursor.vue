@@ -37,15 +37,17 @@ export default defineComponent({
       y: number
       deg: number // 横向偏移角度
       size: number
-      v: number // 速度
+      v: number // 纵向速度
+      vx: number // 横向速度
       a: number // 加速度
       alpha: number // 透明度
       constructor() {
         this.x = Math.random() * canvas.width // 随机横坐标
         this.y = Math.random() * canvas.height // 随机纵坐标
-        this.deg = Math.random() * 0 // 随机偏移角度
+        this.deg = Math.random() * 360 // 随机偏移角度
         this.size = Math.random() * 30 + 20 // 随机大小
-        this.v = Math.random() * 0.5 + 0.5 // 随机速度
+        this.v = Math.random() * 0.5 + 0.5 // 随机纵向速度
+        this.vx = Math.random() * 0.5 + 0.5 // 随机横向速度
         this.a = Math.random() * 0.0015 + 0.0005 // 随机加速度
         this.alpha = 1 // 初始化透明度
       }
@@ -65,10 +67,11 @@ export default defineComponent({
         this.deg += Math.random() * 2 - 1 // 随机偏移
         this.size += Math.random() * 0.1 - 0.05 // 随机大小变化
         this.v += this.a // 加速度变化速度
+        this.x += this.vx // 更新横坐标
         this.y += this.v // 更新纵坐标
         this.alpha = (canvas.height - this.y) / canvas.height // 透明度变化
-        if (this.alpha <= 0) {
-          // 透明度小于 0 时，重置对象
+        if (this.alpha <= 0 || this.x > canvas.width) {
+          // 透明度小于 0 或 超出右边界时，重置对象
           this.alpha = 0
           this.new()
         }
@@ -76,11 +79,19 @@ export default defineComponent({
 
       new() {
         // 对象重置
-        this.x = Math.random() * canvas.width
-        this.y = 0
+        if (Math.random() > 0.5) {
+          // 从顶部进入
+          this.x = Math.random() * canvas.width
+          this.y = 0
+        } else {
+          // 从左侧进入
+          this.x = 0
+          this.y = Math.random() * canvas.height
+        }
         this.deg = Math.random() * 360
         this.size = Math.random() * 30 + 20
         this.v = Math.random() * 0.5 + 0.5
+        this.vx = Math.random() * 0.5 + 0.5
         this.a = Math.random() * 0.0015 + 0.0005
         this.alpha = 1
       }

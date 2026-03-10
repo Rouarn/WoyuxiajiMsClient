@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "作品1",
+    "pic": "/images/background28.jpg",
+    "platform": "平台1",
+    "Introduce": "这是我的作品1",
+    "url": "https://www.baidu.com"
+  },
+  {
+    "id": 2,
+    "title": "作品2",
+    "pic": "/images/background28.jpg",
+    "platform": "平台2",
+    "Introduce": "这是我的作品2",
+    "url": "https://www.baidu.com"
+  }
+]

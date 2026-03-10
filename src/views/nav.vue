@@ -2,8 +2,8 @@
   <nav :class="{ active: navActive }">
     <div class="nav">
       <a class="nav__logo" href="#">
-        <img src="@/assets/images/Logo_Main_2108.svg" alt="logo" ref="Logo_Main" />
-        <img src="@/assets/images/Logo_Text_2108.svg" alt="logo" ref="Logo_Text" />
+        <img src="/images/Logo_Main_2108.svg" alt="logo" ref="Logo_Main" />
+        <img src="/images/Logo_Text_2108.svg" alt="logo" ref="Logo_Text" />
       </a>
       <div class="switch" @click.stop="IsMove" :class="{ active: IsMoveShow }"></div>
       <div class="nav__menu" @click.stop="">
@@ -25,10 +25,6 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
-import logoMain2208 from '@/assets/images/Logo_Main_2208.svg'
-import logoText2208 from '@/assets/images/Logo_Text_2208.svg'
-import logoMain2108 from '@/assets/images/Logo_Main_2108.svg'
-import logoText2108 from '@/assets/images/Logo_Text_2108.svg'
 import moonIcon from '@/assets/images/TB-Jerry-moon.svg'
 import sunIcon from '@/assets/images/TB-Tom-sun.svg'
 // 移动端导航栏效果
@@ -72,14 +68,14 @@ watch(
     if (newVal) {
       navActive.value = true
       if (Logo_Main.value && Logo_Text.value) {
-        Logo_Main.value.src = logoMain2208
-        Logo_Text.value.src = logoText2208
+        Logo_Main.value.src = '/images/Logo_Main_2208.svg'
+        Logo_Text.value.src = '/images/Logo_Text_2208.svg'
       }
     } else {
       navActive.value = false
       if (Logo_Main.value && Logo_Text.value) {
-        Logo_Main.value.src = logoMain2108
-        Logo_Text.value.src = logoText2108
+        Logo_Main.value.src = '/images/Logo_Main_2108.svg'
+        Logo_Text.value.src = '/images/Logo_Text_2108.svg'
       }
     }
   },
