@@ -7,5 +7,4 @@
 import BackToTop from '@/components/back-to-top.vue'
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

@@ -13,8 +13,11 @@
       >
         <img :src="item.pic" :alt="item.title" />
         <div class="workLinkText">
-          <h2>{{ item.title }}</h2>
-          <p>{{ item.platform }}</p>
+          <div class="workLinkTextTitle">
+
+            <h2>{{ item.title }}</h2>
+            <p>{{ item.platform }}</p>
+          </div>
           <p>{{ item.Introduce }}</p>
         </div>
       </a>
@@ -97,7 +100,6 @@ onMounted(() => {})
       // 一行间距 两边
       --A-margin: 25px;
       width: var(--A-width);
-      height: 250px;
       // 使用 flex + margin 自动计算间距
       margin: 25px calc((100% - var(--A-width) * var(--A-num)) / var(--A-num) / 2);
       border-radius: 10px;
@@ -121,10 +123,17 @@ onMounted(() => {})
         flex-direction: column;
         align-items: flex-start;
         padding: 10px 20px;
+        .workLinkTextTitle {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          margin-bottom: 5px;
+        }
         h2 {
           font-size: 20px;
           color: #000000;
-          margin: 5px 0 0;
+          margin: 0;
           font-size: 16px;
           font-weight: 700;
         }

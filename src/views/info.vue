@@ -26,8 +26,8 @@
 
 <script setup lang="ts">
 // 引入under-line组件
-import UnderLine from "@/components/under-line.vue";
-import { onMounted, ref } from "vue";
+import UnderLine from '@/components/under-line.vue'
+import { onMounted, ref } from 'vue'
 
 const list = ref([
   {
@@ -80,15 +80,15 @@ const list = ref([
   },
 ])
 
-const DetermineScreenWidth = ref<boolean>(false);
+const DetermineScreenWidth = ref<boolean>(false)
 onMounted(() => {
   // 判断屏幕宽度
   if (document.documentElement.clientWidth < 1200) {
-    DetermineScreenWidth.value = false;
+    DetermineScreenWidth.value = false
   } else {
-    DetermineScreenWidth.value = true;
+    DetermineScreenWidth.value = true
   }
-});
+})
 </script>
 
 <style lang="scss" scoped>
@@ -125,21 +125,13 @@ onMounted(() => {
       width: 150px;
       height: 100px;
       z-index: 1;
-      background-image: linear-gradient(
-        to left,
-        rgba(255, 255, 255, 0),
-        rgb(255, 255, 255)
-      );
+      background-image: linear-gradient(to left, rgba(255, 255, 255, 0), rgb(255, 255, 255));
     }
     .logMaskR {
       display: block;
       width: 150px;
       height: 100px;
-      background-image: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0),
-        rgb(255, 255, 255)
-      );
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(255, 255, 255));
     }
   }
   .log {

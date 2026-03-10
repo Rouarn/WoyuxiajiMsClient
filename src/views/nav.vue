@@ -34,26 +34,26 @@ import sunIcon from '@/assets/images/TB-Tom-sun.svg'
 // 移动端导航栏效果
 const IsMoveShow = ref(false)
 const IsMove = () => {
-  IsMoveShow.value = !IsMoveShow.value;
-};
+  IsMoveShow.value = !IsMoveShow.value
+}
 
 // 点击非switch区域关闭switch,排除nav__menu里面的a标签
 const handleOutsideClick = (e: MouseEvent) => {
-  const switchDom = document.querySelector(".switch");
-  const navMenuDom = document.querySelector(".nav__menu");
-  const target = e.target as Node;
+  const switchDom = document.querySelector('.switch')
+  const navMenuDom = document.querySelector('.nav__menu')
+  const target = e.target as Node
   if (switchDom && navMenuDom && !switchDom.contains(target) && !navMenuDom.contains(target)) {
-    IsMoveShow.value = false;
+    IsMoveShow.value = false
   }
-};
+}
 
 onMounted(() => {
-  document.addEventListener("click", handleOutsideClick);
-});
+  document.addEventListener('click', handleOutsideClick)
+})
 
 onUnmounted(() => {
-  document.removeEventListener("click", handleOutsideClick);
-});
+  document.removeEventListener('click', handleOutsideClick)
+})
 
 // 监视器watch
 const props = defineProps({
@@ -64,29 +64,33 @@ const props = defineProps({
 })
 
 const navActive = ref(false)
-const Logo_Main: any = ref(null)
-const Logo_Text: any = ref(null)
+const Logo_Main = ref<HTMLImageElement | null>(null)
+const Logo_Text = ref<HTMLImageElement | null>(null)
 watch(
   () => props.navClassCame,
   (newVal) => {
     if (newVal) {
       navActive.value = true
-      Logo_Main.value.src = logoMain2208
-      Logo_Text.value.src = logoText2208
+      if (Logo_Main.value && Logo_Text.value) {
+        Logo_Main.value.src = logoMain2208
+        Logo_Text.value.src = logoText2208
+      }
     } else {
       navActive.value = false
-      Logo_Main.value.src = logoMain2108
-      Logo_Text.value.src = logoText2108
+      if (Logo_Main.value && Logo_Text.value) {
+        Logo_Main.value.src = logoMain2108
+        Logo_Text.value.src = logoText2108
+      }
     }
   },
 )
 
-const sum: any = ref(null)
+const sum = ref<HTMLImageElement | null>(null)
 const topicSwitching = () => {
-  if (sum.value.alt === 'sum') {
+  if (sum.value?.alt === 'sum') {
     sum.value.src = moonIcon
     sum.value.alt = 'moon'
-  } else {
+  } else if (sum.value) {
     sum.value.src = sunIcon
     sum.value.alt = 'sum'
   }

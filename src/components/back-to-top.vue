@@ -1,11 +1,6 @@
 <template>
   <transition name="fade">
-    <div
-      v-show="showButton"
-      class="back-to-top"
-      @click="scrollToTop"
-      title="返回顶部"
-    >
+    <div v-show="showButton" class="back-to-top" @click="scrollToTop" title="返回顶部">
       <svg
         viewBox="0 0 24 24"
         width="24"
@@ -85,7 +80,9 @@ onUnmounted(() => {
 /* 渐变过渡动画 */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .fade-enter-from,
