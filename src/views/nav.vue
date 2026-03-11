@@ -3,7 +3,7 @@
     <div class="nav">
       <a class="nav__logo" href="#">
         <img src="/images/Logo_Main_2108.svg" alt="logo" ref="Logo_Main" />
-        <img src="/images/Logo_Text_2108.svg" alt="logo" ref="Logo_Text" />
+        <img :src="navActive ? '/images/Logo_Text_2208.svg' : '/images/Logo_Text_2108.svg'" alt="logo" ref="Logo_Text" />
       </a>
       <div class="switch" @click.stop="IsMove" :class="{ active: IsMoveShow }"></div>
       <div class="nav__menu" @click.stop="">
@@ -12,9 +12,9 @@
           <li @click.stop=""><a href="#about">关于</a></li>
           <li @click.stop=""><a href="#work">作品</a></li>
           <li @click.stop=""><a href="#info">日志</a></li>
-          <li @click.stop="topicSwitching">
+          <li @click.stop="toggleTheme">
             <a>
-              <img src="@/assets/images/TB-Tom-sun.svg" alt="sum" ref="sum" />
+              <img :src="isDark ? moonIcon : sunIcon" :alt="isDark ? 'moon' : 'sun'" />
             </a>
           </li>
         </ul>
@@ -27,6 +27,8 @@
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import moonIcon from '@/assets/images/TB-Jerry-moon.svg'
 import sunIcon from '@/assets/images/TB-Tom-sun.svg'
+import { useThemeStore } from '@/stores/theme'
+import { storeToRefs } from 'pinia'
 // 移动端导航栏效果
 const IsMoveShow = ref(false)
 const IsMove = () => {
@@ -60,37 +62,21 @@ const props = defineProps({
 })
 
 const navActive = ref(false)
-const Logo_Main = ref<HTMLImageElement | null>(null)
-const Logo_Text = ref<HTMLImageElement | null>(null)
+
+const themeStore = useThemeStore()
+const { isDark } = storeToRefs(themeStore)
+const { toggleTheme } = themeStore
+
 watch(
   () => props.navClassCame,
   (newVal) => {
     if (newVal) {
       navActive.value = true
-      if (Logo_Main.value && Logo_Text.value) {
-        Logo_Main.value.src = '/images/Logo_Main_2208.svg'
-        Logo_Text.value.src = '/images/Logo_Text_2208.svg'
-      }
     } else {
       navActive.value = false
-      if (Logo_Main.value && Logo_Text.value) {
-        Logo_Main.value.src = '/images/Logo_Main_2108.svg'
-        Logo_Text.value.src = '/images/Logo_Text_2108.svg'
-      }
     }
   },
 )
-
-const sum = ref<HTMLImageElement | null>(null)
-const topicSwitching = () => {
-  if (sum.value?.alt === 'sum') {
-    sum.value.src = moonIcon
-    sum.value.alt = 'moon'
-  } else if (sum.value) {
-    sum.value.src = sunIcon
-    sum.value.alt = 'sum'
-  }
-}
 </script>
 
 <style lang="scss" scoped>
@@ -102,16 +88,16 @@ nav {
   z-index: 999;
   transition: all 0.5s;
   &.active {
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.03) 0 5px 10px;
+    background-color: var(--nav-bg);
+    box-shadow: var(--nav-shadow) 0 5px 10px;
     .nav {
       .nav__menu {
         ul {
           li {
             a {
-              color: #000;
+              color: var(--nav-text);
               &:hover {
-                background-color: rgba(0, 0, 0, 0.1);
+                background-color: var(--nav-text-hover-bg);
               }
             }
           }
@@ -206,10 +192,10 @@ nav {
   //  把已经设置的所有样式都设为空
   nav {
     &.active > .nav > .switch {
-      background-color: #000000;
+      background-color: var(--nav-switch-color);
       &::before,
       &::after {
-        background-color: #000000;
+        background-color: var(--nav-switch-color);
       }
     }
     .nav {
@@ -263,7 +249,7 @@ nav {
           display: flex;
           align-items: center;
           justify-items: center;
-          background-color: pink;
+          background-color: var(--nav-mobile-bg);
           // 添加动画
           transition: all 0.5s;
           ul {

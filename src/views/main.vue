@@ -86,7 +86,7 @@ onMounted(() => {
       h1 {
         font-weight: 400;
         font-size: 76px;
-        color: #fff;
+        color: var(--main-text);
       }
       margin-bottom: 3px;
     }
@@ -100,7 +100,7 @@ onMounted(() => {
       .topTitleCenter__info__text {
         & > span {
           font-size: 15px;
-          color: #fff;
+          color: var(--main-text);
           &.blinkingCursor:nth-child(2) {
             color: #00ff00;
             &::after {
@@ -108,7 +108,7 @@ onMounted(() => {
               display: inline-block;
               width: 2px;
               height: 15px;
-              background-color: #fff;
+              background-color: var(--main-text);
               margin: 0 5px;
               vertical-align: middle;
               // 闪烁效果
@@ -131,13 +131,13 @@ onMounted(() => {
         .text-item {
           display: inline-block;
           font-size: 15px;
-          color: #fff;
+          color: var(--main-text);
           margin: 0 2px;
         }
       }
       .topTitleCenter__info__time {
         font-size: 16px;
-        color: #fff;
+        color: var(--main-text);
       }
     }
   }

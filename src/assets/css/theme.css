@@ -1,0 +1,67 @@
+:root { 
+  /* Global */
+  --bg-color: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --text-primary: #333333;
+  --text-regular: #000000;
+  --text-white: #ffffff;
+  
+  /* Nav */
+  --nav-bg: #ffffff;
+  --nav-text: #000000;
+  --nav-text-hover-bg: rgba(0, 0, 0, 0.1);
+  --nav-shadow: rgba(0, 0, 0, 0.03);
+  --nav-mobile-bg: pink;
+  --nav-switch-color: #000000;
+  
+  /* Work */
+  --work-title-color: #000000;
+  --card-bg: #ffffff;
+  --card-text-title: #000000;
+  --card-text-desc: #000000;
+  --card-shadow: rgba(0, 0, 0, 0.03);
+  --card-shadow-hover: rgba(0, 0, 0, 0.5);
+  
+  /* Footer */
+  --footer-text: #ffffff;
+  
+  /* Main */
+  --main-text: #ffffff;
+}
+
+html.dark {
+  /* Global */
+  --bg-color: #121212;
+  --bg-secondary: #1a1a1a;
+  --text-primary: #e0e0e0; /* 或者使用 #ffffff 来获得更高对比度 */
+  --text-regular: #e0e0e0;
+  --text-white: #ffffff;
+  
+  /* Nav */
+  --nav-bg: #1a1a1a;
+  --nav-text: #ffffff; /* 提高对比度 */
+  --nav-text-hover-bg: rgba(255, 255, 255, 0.1);
+  --nav-shadow: rgba(0, 0, 0, 0.5);
+  --nav-mobile-bg: #242424;
+  --nav-switch-color: #ffffff;
+  
+  /* Work */
+  --work-title-color: #ffffff; /* 提高对比度 */
+  --card-bg: #2a2a2a; /* 稍微提亮 */
+  --card-text-title: #ffffff; /* 提高对比度 */
+  --card-text-desc: #bbbbbb; /* 稍微提亮 */
+  --card-shadow: rgba(0, 0, 0, 0.3); /* 减少暗沉 */
+  --card-shadow-hover: rgba(0, 0, 0, 0.6); /* 减少暗沉 */
+  
+  /* Footer */
+  --footer-text: #cccccc;
+  
+  /* Main */
+  --main-text: #e0e0e0; /* 或者使用 #ffffff */
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}

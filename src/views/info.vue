@@ -5,11 +5,7 @@
     <p>左右滑动来查看</p>
     <div class="log">
       <div class="log-list">
-        <div class="log-item move">
-          <h2></h2>
-          <p></p>
-          <p></p>
-        </div>
+        <div class="log-item"></div>
         <div class="log-item" v-for="item in list" :key="item.id">
           <h2>{{ item.logTime }}</h2>
           <p>{{ item.description }}</p>
@@ -71,13 +67,13 @@ onMounted(async () => {
   position: relative;
   h1 {
     font-size: 30px;
-    color: #000000;
+    color: var(--text-primary);
     margin-bottom: 17px;
     cursor: pointer;
   }
   p {
     font-size: 12px;
-    color: #000000;
+    color: var(--text-primary);
     margin-top: 17px;
   }
   .logMask {
@@ -93,13 +89,13 @@ onMounted(async () => {
       width: 150px;
       height: 100px;
       z-index: 1;
-      background-image: linear-gradient(to left, rgba(255, 255, 255, 0), rgb(255, 255, 255));
+      background-image: linear-gradient(to left, rgba(255, 255, 255, 0), var(--bg-color));
     }
     .logMaskR {
       display: block;
       width: 150px;
       height: 100px;
-      background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(255, 255, 255));
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0), var(--bg-color));
     }
   }
   .log {
@@ -126,20 +122,17 @@ onMounted(async () => {
         align-items: flex-start;
         padding-bottom: 75px;
         position: relative;
-        &.move {
-          display: none;
-        }
         h2 {
           margin: 0;
           padding: 0;
           font-size: 18px;
           font-weight: 700;
-          color: #000;
+          color: var(--text-primary);
         }
         p {
           margin: 0;
           padding: 0;
-          color: #ccc;
+          color: var(--text-regular);
           font-size: 14px;
           &:nth-child(3) {
             position: absolute;

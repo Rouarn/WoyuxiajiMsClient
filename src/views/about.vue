@@ -59,7 +59,7 @@ onMounted(() => {
   align-items: center;
   h1 {
     font-size: 30px;
-    color: #000000;
+    color: var(--text-primary);
     margin-bottom: 25px;
     cursor: pointer;
   }
@@ -74,15 +74,15 @@ onMounted(() => {
       margin: 0 5px;
       padding: 8px 15px;
       border-radius: 5px;
-      background-color: #f2f2f2;
-      color: #bebebe;
-      box-shadow: rgba(0, 0, 0, 0.1) 0 5px 20px;
+      background-color: var(--tag-bg);
+      color: var(--tag-text);
+      box-shadow: var(--tag-shadow) 0 5px 20px;
       transition: all 0.3s ease;
       cursor: pointer;
       &:hover {
-        background-color: #ebebeb;
-        color: #000000;
-        box-shadow: rgba(0, 0, 0, 0.2) 0 5px 20px;
+        background-color: var(--tag-hover-bg);
+        color: var(--tag-hover-text);
+        box-shadow: var(--tag-shadow) 0 5px 20px;
       }
     }
   }
@@ -93,7 +93,7 @@ onMounted(() => {
     p {
       margin: 14px 0;
       font-size: 15px;
-      color: rgba(51, 51, 51, 1);
+      color: var(--about-text);
       font-family: '幼圆';
     }
   }

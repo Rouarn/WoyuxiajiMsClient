@@ -50,22 +50,22 @@ onUnmounted(() => {
   bottom: 40px;
   width: 50px;
   height: 50px;
-  background-color: #fff;
+  background-color: var(--bg-color);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  color: #333;
+  color: var(--text-primary);
   z-index: 1000;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    background-color: #f8f8f8;
-    color: #000;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
   }
 
   svg {

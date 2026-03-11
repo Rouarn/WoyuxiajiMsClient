@@ -69,7 +69,7 @@ onMounted(async () => {
   padding: 150px 0 100px 0;
   h1 {
     font-size: 30px;
-    color: #000000;
+    color: var(--work-title-color);
     margin-bottom: 25px;
     cursor: pointer;
   }
@@ -78,7 +78,7 @@ onMounted(async () => {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: #f5f5f5;
+    background-color: var(--bg-secondary);
     z-index: -1;
   }
 
@@ -101,21 +101,21 @@ onMounted(async () => {
       margin: 25px calc((100% - var(--A-width) * var(--A-num)) / var(--A-num) / 2);
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: rgba(0, 0, 0, 0.03) 0 5px 10px;
+      box-shadow: var(--card-shadow) 0 5px 10px;
       transition: all 0.3s ease-in-out;
       &:hover {
-        box-shadow: rgba(0, 0, 0, 0.5) 0 5px 20px;
+        box-shadow: var(--card-shadow-hover) 0 5px 20px;
         transform: scale(1.1) translateY(-20px);
       }
       img {
         width: 100%;
         height: 155px;
         object-fit: fill;
-        background-color: #ffffff;
+        background-color: var(--card-bg);
       }
       .workLinkText {
         height: calc(100% - 155px);
-        background-color: #ffffff;
+        background-color: var(--card-bg);
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -129,17 +129,17 @@ onMounted(async () => {
         }
         h2 {
           font-size: 20px;
-          color: #000000;
+          color: var(--card-text-title);
           margin: 0;
           font-size: 16px;
           font-weight: 700;
         }
         p {
           font-size: 16px;
-          color: #000000;
+          color: var(--card-text-desc);
           &:nth-child(2) {
             margin: 1px 0 0;
-            color: #000;
+            color: var(--card-text-desc);
             font-size: small;
             white-space: nowrap;
             overflow: hidden;
@@ -149,7 +149,7 @@ onMounted(async () => {
           &:nth-child(3) {
             margin: 9px 0 0;
             font-size: 12px;
-            color: #000;
+            color: var(--card-text-desc);
           }
         }
       }

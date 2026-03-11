@@ -1,6 +1,6 @@
 <template>
   <div id="footer">
-    <div class="footer__Item friendshipLink">
+    <div class="footer__Item">
       <p>友情链接</p>
       <a href="#" target="_blank">神剑已去，再无桎梏</a>
       <br />
@@ -74,14 +74,14 @@ onMounted(async () => {
     }
     p {
       font-size: 15px;
-      color: #ffffff;
+      color: var(--footer-text);
     }
     a {
       font-size: 12px;
-      color: #ffffff;
+      color: var(--footer-text);
       text-decoration: none;
       &:hover {
-        color: #ffffff;
+        color: var(--footer-text);
         text-decoration: underline;
       }
     }
@@ -110,14 +110,14 @@ onMounted(async () => {
       display: none;
       p {
         font-size: 15px;
-        color: #ffffff;
+        color: var(--footer-text);
       }
       a {
         font-size: 12px;
-        color: #ffffff;
+        color: var(--footer-text);
         text-decoration: none;
         &:hover {
-          color: #ffffff;
+          color: var(--footer-text);
           text-decoration: underline;
         }
       }
