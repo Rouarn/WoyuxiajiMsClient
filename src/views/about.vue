@@ -4,10 +4,10 @@
     <under-line></under-line>
     <div class="tag">
       <span class="tag__item">00后</span>
-      <span class="tag__item">XMFLS</span>
-      <span class="tag__item">NJU</span>
+      <span class="tag__item">WYXJ</span>
+      <span class="tag__item">YXNYG</span>
       <span class="tag__item">小黑子</span>
-      <span class="tag__item" @click="isCherryBlossom">{{ BlossomShow }}</span>
+      <span class="tag__item" @click="toggleCherryBlossom">{{ blossomButtonText }}</span>
     </div>
     <div class="aboutContent">
       <p>嗨,我是刘靓仔。</p>
@@ -28,25 +28,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import UnderLine from '@/components/under-line.vue'
 
 // 控制樱花飘落是否显示
-const isCherryBlossomShow = ref(false)
-const BlossomShow = ref('关闭樱花飘落')
-const CherryBlossomShowEmits = defineEmits(['isCherryBlossomShow'])
-const isCherryBlossom = () => {
+const isCherryBlossomShow = ref(true)
+const blossomButtonText = computed(() =>
+  isCherryBlossomShow.value ? '关闭樱花飘落' : '开启樱花飘落',
+)
+const emit = defineEmits(['isCherryBlossomShow'])
+
+const toggleCherryBlossom = () => {
   isCherryBlossomShow.value = !isCherryBlossomShow.value
-  CherryBlossomShowEmits('isCherryBlossomShow', isCherryBlossomShow.value)
-  if (isCherryBlossomShow.value) {
-    BlossomShow.value = '关闭樱花飘落'
-  } else {
-    BlossomShow.value = '开启樱花飘落'
-  }
+  emit('isCherryBlossomShow', isCherryBlossomShow.value)
 }
-onMounted(() => {
-  isCherryBlossom()
-})
+
+// 初始化时通知父组件
+emit('isCherryBlossomShow', isCherryBlossomShow.value)
 </script>
 
 <style lang="scss" scoped>

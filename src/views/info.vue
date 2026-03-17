@@ -23,7 +23,7 @@
 <script setup lang="ts">
 // 引入under-line组件
 import UnderLine from '@/components/under-line.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 
 const list = ref<
   {
@@ -34,7 +34,8 @@ const list = ref<
   }[]
 >([])
 
-const DetermineScreenWidth = ref<boolean>(false)
+const DetermineScreenWidth = computed(() => window.matchMedia('(min-width: 1200px)').matches)
+
 onMounted(async () => {
   try {
     const response = await fetch('/json/info.json')
@@ -44,13 +45,6 @@ onMounted(async () => {
     list.value = await response.json()
   } catch (error) {
     console.error('Failed to fetch info.json:', error)
-  }
-
-  // 判断屏幕宽度
-  if (document.documentElement.clientWidth < 1200) {
-    DetermineScreenWidth.value = false
-  } else {
-    DetermineScreenWidth.value = true
   }
 })
 </script>
@@ -99,7 +93,7 @@ onMounted(async () => {
     }
   }
   .log {
-    width: 100vw;
+    width: 100%;
     height: 150px;
     display: flex;
     justify-content: center;

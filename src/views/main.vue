@@ -11,7 +11,7 @@
           <span :class="{ blinkingCursor: blinkingCursor }">{{ introduce }}</span>
           <span>&nbsp;*/</span>
         </div>
-        <div class="topTitleCenter__info__time" ref="now"></div>
+        <div class="topTitleCenter__info__time">{{ currentTime }}</div>
       </div>
     </div>
     <div class="scrollDownIcon" @click="scrollAbouta"></div>
@@ -19,8 +19,8 @@
 </template>
 
 <script setup lang="ts">
-import moment from 'moment'
-import { onMounted, ref } from 'vue'
+import dayjs from 'dayjs'
+import { onMounted, onUnmounted, ref } from 'vue'
 import UnderLine from '@/components/under-line.vue'
 
 const scrollAbouta = () => {
@@ -33,36 +33,47 @@ const scrollAbouta = () => {
 const main = ref<HTMLElement | null>(null)
 const mainEmits = defineEmits(['mainHeight'])
 
-onMounted(() => {
-  // 获取滚动条距离顶部的距离
-  if (main.value) {
-    mainEmits('mainHeight', main.value.offsetHeight)
-  }
-})
-
 // 打字机效果
 const introduce = ref('')
 const blinkingCursor = ref(true)
+const currentTime = ref('')
+let typewriterTimer: number
+let clockTimer: number
+
+const updateHeight = () => {
+  if (main.value) {
+    mainEmits('mainHeight', main.value.offsetHeight)
+  }
+}
+
 onMounted(() => {
+  updateHeight()
+  window.addEventListener('resize', updateHeight)
+
+  // Typewriter effect
   let i = 0
   const str = '这里是刘靓仔的个人主页'
-  const timer = setInterval(() => {
+  typewriterTimer = window.setInterval(() => {
     introduce.value += str[i]
     i++
     if (i >= str.length) {
-      clearInterval(timer)
+      clearInterval(typewriterTimer)
       setTimeout(() => {
         blinkingCursor.value = false
       }, 1000)
     }
   }, 300)
+
+  // Clock
+  clockTimer = window.setInterval(() => {
+    currentTime.value = dayjs().format('今天是YYYY年MM月DD日HH:mm:ss')
+  }, 1000)
 })
 
-const now = ref<HTMLElement | null>(null)
-onMounted(() => {
-  setInterval(() => {
-    if (now.value) now.value.innerHTML = moment().format('今天是YYYY年MM月DD日HH:mm:ss')
-  }, 1000)
+onUnmounted(() => {
+  window.removeEventListener('resize', updateHeight)
+  clearInterval(typewriterTimer)
+  clearInterval(clockTimer)
 })
 </script>
 

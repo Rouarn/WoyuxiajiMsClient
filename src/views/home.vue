@@ -1,5 +1,4 @@
 <template>
-  <div class="home">
     <Nav :navClassCame="isNavActive"></Nav>
     <Main @mainHeight="homePageHeight"></Main>
     <blinking-cursor
@@ -11,7 +10,6 @@
     <Work></Work>
     <Info></Info>
     <Footer></Footer>
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -60,8 +58,4 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" scoped>
-.home {
-  width: 100%;
-  height: 100%;
-}
 </style>

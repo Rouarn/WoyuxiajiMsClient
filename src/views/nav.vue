@@ -2,20 +2,19 @@
   <nav :class="{ active: navActive }">
     <div class="nav">
       <a class="nav__logo" href="#">
-        <img src="/images/Logo_Main_2108.svg" alt="logo" ref="Logo_Main" />
-        <img
-          :src="navActive ? '/images/Logo_Text_2208.svg' : '/images/Logo_Text_2108.svg'"
-          alt="logo"
-          ref="Logo_Text"
-        />
+        <img :src="navActive ? '/images/Logo_Main_2208.svg' : '/images/Logo_Main_2108.svg'" alt="logo" />
+        <img :src="navActive ? '/images/Logo_Text_2208.svg' : '/images/Logo_Text_2108.svg'" alt="logo" />
       </a>
-      <div class="switch" @click.stop="IsMove" :class="{ active: IsMoveShow }"></div>
-      <div class="nav__menu" @click.stop="">
-        <ul @click.stop="" :class="{ active: navActive || isDark }">
-          <li @click.stop=""><a href="#">首页</a></li>
-          <li @click.stop=""><a href="#about">关于</a></li>
-          <li @click.stop=""><a href="#work">作品</a></li>
-          <li @click.stop=""><a href="#info">日志</a></li>
+      <div class="switch" @click.stop="IsMove" :class="{ active: IsMoveShow }">
+        <span class="line"></span>
+      </div>
+      <div class="nav__overlay" v-if="IsMoveShow" @click="IsMove"></div>
+      <div class="nav__menu" :class="{ active: IsMoveShow }" @click.stop="">
+        <ul :class="{ active: navActive || isDark }">
+          <li @click="IsMove"><a href="#">首页</a></li>
+          <li @click="IsMove"><a href="#about">关于</a></li>
+          <li @click="IsMove"><a href="#work">作品</a></li>
+          <li @click="IsMove"><a href="#info">日志</a></li>
           <li @click.stop="toggleTheme">
             <a>
               <img :src="isDark ? moonIcon : sunIcon" :alt="isDark ? 'moon' : 'sun'" />
@@ -66,19 +65,13 @@ const props = defineProps({
 })
 
 const navActive = ref(false)
-
 const themeStore = useThemeStore()
 const { isDark } = storeToRefs(themeStore)
 const { toggleTheme } = themeStore
-
 watch(
   () => props.navClassCame,
   (newVal) => {
-    if (newVal) {
-      navActive.value = true
-    } else {
-      navActive.value = false
-    }
+    navActive.value = newVal
   },
 )
 </script>
@@ -87,7 +80,7 @@ watch(
 nav {
   position: fixed;
   top: 0;
-  width: 100vw;
+  width: 100%;
   height: 100px;
   z-index: 999;
   transition: all 0.5s;
@@ -200,136 +193,136 @@ nav {
 <style lang="scss" scoped>
 // 移动端
 @media screen and (max-width: 768px) {
-  //  把已经设置的所有样式都设为空
   nav {
     &.active > .nav > .switch {
-      background-color: var(--nav-switch-color);
+      z-index: 1001;
       &::before,
-      &::after {
+      &::after,
+      .line {
         background-color: var(--nav-switch-color);
       }
     }
     .nav {
       position: relative;
       .switch {
-        width: 20px;
-        height: 1px;
-        background-color: #fff;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
         transition: all 0.5s;
-        z-index: 5;
-        &::before {
+        z-index: 1001;
+        position: relative;
+        &::before,
+        &::after,
+        .line {
           content: '';
           width: 20px;
-          height: 1px;
+          height: 2px;
           background-color: #fff;
           position: absolute;
-          top: 8px;
-          left: 0;
-          // pointer-events: none;  // 事件穿透
+          transition: all 0.3s ease;
+        }
+        .line {
+          width: 20px;
+        }
+        &::before {
+          top: 6px;
         }
         &::after {
-          content: '';
-          width: 20px;
-          height: 1px;
-          background-color: #fff;
-          position: absolute;
-          top: -8px;
-          left: 0;
-          // pointer-events: none;
+          bottom: 6px;
         }
         &.active {
-          width: 0;
-          margin-right: 20px;
-          background-color: transparent;
-          cursor: pointer;
+          .line {
+            width: 0;
+            opacity: 0;
+          }
           &::before {
             transform: rotate(45deg);
-            top: 0;
+            top: 14px;
           }
           &::after {
             transform: rotate(-45deg);
-            top: 0;
-          }
-        }
-        &.active + .nav__menu {
-          position: absolute;
-          top: 0;
-          left: 20vw;
-          width: 70vw;
-          height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-items: center;
-          background-color: var(--nav-mobile-bg);
-          // 添加动画
-          transition: all 0.5s;
-          ul {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            li {
-              width: 100%;
-              height: 50px;
-              margin: 0;
-              display: flex;
-              align-items: center;
-              justify-items: center;
-              a {
-                width: 100%;
-                height: 100%;
-                text-decoration: none;
-                color: var(--text-primary);
-                font-size: 15px;
-                border-radius: 5px;
-                text-align: center;
-                padding: 7px 20px;
-                transition: all 0.5s;
-                > img {
-                  width: 30px;
-                  height: 30px;
-                  margin: 0 auto;
-                }
-              }
-              &:hover {
-                &::after {
-                  display: block;
-                }
-                a {
-                  transition: 0.5s;
-                  background-color: rgba(0, 0, 0, 0.1);
-                }
-              }
-              &::after {
-                content: '';
-                width: 50px;
-                height: 3px;
-                border-bottom: 1px solid rgba(0, 255, 0, 0.7);
-                position: absolute;
-                left: 41%;
-                bottom: 18%;
-                transition: width 0.3s;
-                display: none;
-              }
-              &:last-child::after {
-                content: none;
-              }
-            }
+            bottom: 14px;
           }
         }
       }
+
+      .nav__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(4px);
+        z-index: 999;
+        transition: opacity 0.3s ease;
+      }
+
       .nav__menu {
-        display: none;
+        position: fixed;
+        top: 0;
+        right: -70vw;
+        width: 70vw;
+        height: 100vh;
+        background: var(--nav-mobile-bg);
+        z-index: 1000;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+
+        &.active {
+          right: 0;
+        }
+
         ul {
+          width: 100%;
+          height: auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+
           li {
+            width: 80%;
+            height: 50px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
             a {
-              > img {
-                width: 30px;
-                height: 30px;
-                margin: 0 auto;
+              width: 100%;
+              height: 100%;
+              text-decoration: none;
+              color: var(--text-primary);
+              font-size: 18px;
+              font-weight: 500;
+              border-radius: 12px;
+              text-align: center;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: all 0.3s ease;
+              background: rgba(255, 255, 255, 0.05);
+
+              &:active {
+                background: rgba(255, 255, 255, 0.15);
+                transform: scale(0.95);
               }
+
+              > img {
+                width: 32px;
+                height: 32px;
+              }
+            }
+
+            &::after {
+              display: none;
             }
           }
         }

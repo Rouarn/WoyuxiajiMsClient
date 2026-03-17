@@ -1,5 +1,5 @@
 <template>
-  <div class="sakura-falling" :style="`top: ${homeHeight}px;}`" v-show="isBlinkingCursorShow">
+  <div class="sakura-falling" :style="`top: ${homeHeight}px`" v-show="isBlinkingCursorShow">
     <canvas ref="canvasRef"></canvas>
   </div>
 </template>
@@ -96,20 +96,17 @@ export default defineComponent({
         this.alpha = 1
       }
     }
+    const updateCanvasDimensions = () => {
+      const container = document.querySelector('.sakura-falling') as HTMLElement
+      if (!container) return
+      canvas.width = container.clientWidth
+      canvas.height = container.clientHeight
+    }
+
     const initCanvas = () => {
-      const about = document.querySelector('.about') as HTMLElement
-      const aboutHeight = about.clientHeight
-      const work = document.querySelector('#work') as HTMLElement
-      const workHeight = work.clientHeight
-      const info = document.querySelector('#info') as HTMLElement
-      const infoHeight = info.clientHeight
-      const footer = document.querySelector('#footer') as HTMLElement
-      const footerHeight = footer.clientHeight
-      const canvasHeight = aboutHeight + workHeight + infoHeight + footerHeight
       canvas = canvasRef.value!
       ctx = canvas.getContext('2d')!
-      canvas.width = window.innerWidth
-      canvas.height = canvasHeight - 37
+      updateCanvasDimensions()
       sakuraImg = new Image()
       sakuraImg.src = sakuraImgSrc
       sakuraImg.onload = () => {
@@ -132,10 +129,12 @@ export default defineComponent({
 
     onMounted(() => {
       initCanvas()
+      window.addEventListener('resize', updateCanvasDimensions)
     })
 
     onUnmounted(() => {
       cancelAnimationFrame(RAF)
+      window.removeEventListener('resize', updateCanvasDimensions)
     })
 
     return {
@@ -147,13 +146,17 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .sakura-falling {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  // height: 100%;
-  pointer-events: none;
-}
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    pointer-events: none;
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
 </style>
