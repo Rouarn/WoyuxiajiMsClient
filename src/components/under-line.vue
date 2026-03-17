@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <hr class="underLine" />
+  <div class="c-underline">
+    <hr class="c-underline__line" />
   </div>
 </template>
 
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-div {
-  .underLine {
+.c-underline {
+  .c-underline__line {
     display: block;
     margin: auto;
     width: 70px;

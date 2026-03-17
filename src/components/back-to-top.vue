@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div v-show="showButton" class="back-to-top" @click="scrollToTop" title="返回顶部">
+    <div v-show="showButton" class="c-back-to-top" @click="scrollToTop" title="返回顶部">
       <svg
         viewBox="0 0 24 24"
         width="24"
@@ -44,7 +44,7 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.back-to-top {
+.c-back-to-top {
   position: fixed;
   right: 40px;
   bottom: 40px;
@@ -93,7 +93,7 @@ onUnmounted(() => {
 
 /* 移动端适配 */
 @media screen and (max-width: 768px) {
-  .back-to-top {
+  .c-back-to-top {
     right: 20px;
     bottom: 20px;
     width: 40px;

@@ -36,7 +36,15 @@
     "title": "贪吃蛇",
     "pic": "http://static.shixian.xyz/files/default/WeChat/greedySnake.png",
     "platform": "微信小程序",
-    "Introduce": "一个像素风的贪吃色游戏",
+    "Introduce": "一个像素风的贪吃蛇游戏",
     "url": "http://static.shixian.xyz/files/default/WeChat/greedySnake.png"
+  },
+  {
+    "id": 6,
+    "title": "聊天系统",
+    "pic": "https://chat.shixian.xyz/assets/intro.svg",
+    "platform": "聊天",
+    "Introduce": "一个简单的在线聊天系统",
+    "url": "https://chat.shixian.xyz"
   }
 ]

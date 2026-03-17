@@ -1,19 +1,20 @@
 <template>
-  <div id="work">
+  <div class="c-work" id="work">
     <h1>我的作品</h1>
     <under-line></under-line>
-    <div class="mark"></div>
-    <div class="workList" ref="workList" v-if="list">
+    <div class="c-work__background"></div>
+    <div class="c-work__list" ref="workList" v-if="list">
       <a
         :href="item.url"
         target="_blank"
         v-for="(item, index) in list"
         :key="item.id"
-        :class="{ Alast: index === list.length - 1 }"
+        class="c-work__card"
+        :class="{ 'c-work__card--last': index === list.length - 1 }"
       >
         <img :src="item.pic" :alt="item.title" />
-        <div class="workLinkText">
-          <div class="workLinkTextTitle">
+        <div class="c-work__card-body">
+          <div class="c-work__card-header">
             <h2>{{ item.title }}</h2>
             <p>{{ item.platform }}</p>
           </div>
@@ -60,7 +61,7 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-#work {
+.c-work {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -73,7 +74,7 @@ onMounted(async () => {
     margin-bottom: 25px;
     cursor: pointer;
   }
-  .mark {
+  .c-work__background {
     position: absolute;
     top: 0;
     width: 100%;
@@ -82,19 +83,20 @@ onMounted(async () => {
     z-index: -1;
   }
 
-  .workList {
+  .c-work__list {
     width: 80%;
     margin: 50px auto 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, 300px);
     gap: 50px;
     justify-content: center;
-    a {
+    .c-work__card {
       width: 100%;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: var(--card-shadow) 0 5px 10px;
       transition: all 0.3s ease-in-out;
+      text-decoration: none;
       &:hover {
         box-shadow: var(--card-shadow-hover) 0 5px 20px;
         transform: scale(1.1) translateY(-20px);
@@ -105,14 +107,14 @@ onMounted(async () => {
         object-fit: contain;
         background-color: var(--card-bg);
       }
-      .workLinkText {
+      .c-work__card-body {
         height: calc(100% - 155px);
         background-color: var(--card-bg);
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         padding: 10px 20px;
-        .workLinkTextTitle {
+        .c-work__card-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -151,12 +153,12 @@ onMounted(async () => {
 
 // 移动端给作品列表加上 flex-direction: column;
 @media screen and (max-width: 768px) {
-  #work {
-    .workList {
+  .c-work {
+    .c-work__list {
       grid-template-columns: 1fr;
       justify-items: center;
       gap: 25px;
-      a {
+      .c-work__card {
         max-width: 100%;
       }
     }

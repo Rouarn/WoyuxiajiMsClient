@@ -1,6 +1,6 @@
 <template>
-  <div id="footer">
-    <div class="footer__Item">
+  <div class="c-footer" id="footer">
+    <div class="c-footer__item">
       <p>友情链接</p>
       <template v-for="(link, index) in footerInfo.friendshipLinks" :key="index">
         <a :href="link.url" target="_blank">{{ link.text }}</a>
@@ -8,7 +8,7 @@
       </template>
     </div>
 
-    <div class="footer__Item contactme">
+    <div class="c-footer__item c-footer__item--contact">
       <p>与我联系</p>
       <template v-for="(item, index) in footerInfo.contact" :key="index">
         <a :href="item.url" :target="item.url.startsWith('mailto') ? '_self' : '_blank'">{{
@@ -17,18 +17,18 @@
         <br v-if="index !== footerInfo.contact.length - 1" />
       </template>
     </div>
-    <div class="footer__Item copyright">
+    <div class="c-footer__item c-footer__item--copyright">
       <p>{{ footerInfo.copyright.text }}</p>
       <a id="linkCopyright" :href="footerInfo.copyright.linkUrl">{{
         footerInfo.copyright.linkText
       }}</a>
       <br />
-      <a href="#" class="pentagram">☆☆☆☆☆</a>
+      <a href="#" class="c-footer__pentagram">☆☆☆☆☆</a>
       <br />
       <a :href="footerInfo.icp.url" target="_blank">{{ footerInfo.icp.text }}</a>
       <br />
-      <span class="beian">
-        <img src="@/assets/images/beian.png" alt="豫公网安备" class="beian__Img" />
+      <span class="c-footer__beian">
+        <img src="@/assets/images/beian.png" alt="豫公网安备" class="c-footer__beian-img" />
         <a :href="footerInfo.beian.url" target="_blank">{{ footerInfo.beian.text }}</a>
       </span>
     </div>
@@ -65,14 +65,14 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-#footer {
+.c-footer {
   width: 100%;
   height: 300px;
   background: url('@/assets/images/footer_background01.jpg') no-repeat center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
-  .footer__Item {
+  .c-footer__item {
     &:nth-child(2) {
       margin: 0 100px;
     }
@@ -89,14 +89,14 @@ onMounted(async () => {
         text-decoration: underline;
       }
     }
-    &.copyright {
+    &.c-footer__item--copyright {
       .old {
         display: none;
       }
-      .beian {
+      .c-footer__beian {
         text-align: start;
 
-        .beian__Img {
+        .c-footer__beian-img {
           display: inline-block;
           vertical-align: sub;
           margin-right: 5px;
@@ -108,9 +108,9 @@ onMounted(async () => {
 
 // 移动端
 @media screen and (max-width: 768px) {
-  #footer {
+  .c-footer {
     height: 400px;
-    .footer__Item {
+    .c-footer__item {
       display: none;
       p {
         font-size: 15px;
@@ -125,12 +125,12 @@ onMounted(async () => {
           text-decoration: underline;
         }
       }
-      &.copyright {
+      &.c-footer__item--copyright {
         display: block;
         .old {
           display: inline-block;
         }
-        .pentagram {
+        .c-footer__pentagram {
           display: none;
         }
       }

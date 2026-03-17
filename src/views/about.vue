@@ -1,15 +1,15 @@
 <template>
-  <div class="about" id="about">
+  <div class="c-about" id="about">
     <h1>关于我</h1>
     <under-line></under-line>
-    <div class="tag">
-      <span class="tag__item">00后</span>
-      <span class="tag__item">WYXJ</span>
-      <span class="tag__item">YXNYG</span>
-      <span class="tag__item">小黑子</span>
-      <span class="tag__item" @click="toggleCherryBlossom">{{ blossomButtonText }}</span>
+    <div class="c-about__tags">
+      <span class="c-about__tag">00后</span>
+      <span class="c-about__tag">WYXJ</span>
+      <span class="c-about__tag">YXNYG</span>
+      <span class="c-about__tag">小黑子</span>
+      <span class="c-about__tag" @click="toggleCherryBlossom">{{ blossomButtonText }}</span>
     </div>
-    <div class="aboutContent">
+    <div class="c-about__content">
       <p>嗨,我是刘靓仔。</p>
       <p>一个练习时长两年半的前端艺术家</p>
       <p>同时也是一名音乐爱好者、白日梦想家</p>
@@ -48,7 +48,7 @@ emit('isCherryBlossomShow', isCherryBlossomShow.value)
 </script>
 
 <style lang="scss" scoped>
-.about {
+.c-about {
   width: 100%;
   height: 100vh;
   display: flex;
@@ -61,14 +61,14 @@ emit('isCherryBlossomShow', isCherryBlossomShow.value)
     margin-bottom: 25px;
     cursor: pointer;
   }
-  .tag {
+  .c-about__tags {
     margin: 25px 0 15px 0;
     width: 100%;
     height: 30px;
     text-align: center;
     line-height: 30px;
     font-size: small;
-    .tag__item {
+    .c-about__tag {
       margin: 0 5px;
       padding: 8px 15px;
       border-radius: 5px;
@@ -85,7 +85,7 @@ emit('isCherryBlossomShow', isCherryBlossomShow.value)
     }
   }
 
-  .aboutContent {
+  .c-about__content {
     text-align: center;
     cursor: pointer;
     p {
@@ -109,16 +109,16 @@ canvas {
 <style lang="scss" scoped>
 // 移动端
 @media screen and (max-width: 768px) {
-  .about {
+  .c-about {
     h1 {
       font-size: 25px;
     }
-    .tag {
-      .tag__item {
+    .c-about__tags {
+      .c-about__tag {
         padding: 5px 10px;
       }
     }
-    .aboutContent {
+    .c-about__content {
       p {
         font-size: 13px;
       }

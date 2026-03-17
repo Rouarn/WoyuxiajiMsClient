@@ -1,20 +1,20 @@
 <template>
-  <div class="main" ref="main">
-    <div class="topTitle">
-      <div class="topTitleCenter__title">
+  <div class="c-main" ref="main">
+    <div class="c-main__header">
+      <div class="c-main__title">
         <h1>我与夏季.</h1>
       </div>
       <UnderLine></UnderLine>
-      <div class="topTitleCenter__info">
-        <div class="topTitleCenter__info__text">
+      <div class="c-main__info">
+        <div class="c-main__info-text">
           <span>/*&nbsp;</span>
-          <span :class="{ blinkingCursor: blinkingCursor }">{{ introduce }}</span>
+          <span :class="{ 'c-main__cursor--blinking': blinkingCursor }">{{ introduce }}</span>
           <span>&nbsp;*/</span>
         </div>
-        <div class="topTitleCenter__info__time">{{ currentTime }}</div>
+        <div class="c-main__info-time">{{ currentTime }}</div>
       </div>
     </div>
-    <div class="scrollDownIcon" @click="scrollAbouta"></div>
+    <div class="c-main__scroll-down" @click="scrollAbouta"></div>
   </div>
 </template>
 
@@ -78,18 +78,18 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.main {
+.c-main {
   width: 100%;
   height: 100vh;
   position: relative;
   background: url('https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN')
     no-repeat center/cover;
-  .topTitle {
+  .c-main__header {
     position: absolute;
     top: 35%;
     width: 100%;
     height: 200px;
-    .topTitleCenter__title {
+    .c-main__title {
       width: 100%;
       display: flex;
       justify-content: center;
@@ -101,18 +101,18 @@ onUnmounted(() => {
       }
       margin-bottom: 3px;
     }
-    .topTitleCenter__info {
+    .c-main__info {
       width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       margin-top: 15px;
-      .topTitleCenter__info__text {
+      .c-main__info-text {
         & > span {
           font-size: 15px;
           color: var(--main-text);
-          &.blinkingCursor:nth-child(2) {
+          &.c-main__cursor--blinking:nth-child(2) {
             color: #00ff00;
             &::after {
               content: '';
@@ -139,20 +139,14 @@ onUnmounted(() => {
             }
           }
         }
-        .text-item {
-          display: inline-block;
-          font-size: 15px;
-          color: var(--main-text);
-          margin: 0 2px;
-        }
       }
-      .topTitleCenter__info__time {
+      .c-main__info-time {
         font-size: 16px;
         color: var(--main-text);
       }
     }
   }
-  .scrollDownIcon {
+  .c-main__scroll-down {
     display: block;
     position: absolute;
     left: 50%;

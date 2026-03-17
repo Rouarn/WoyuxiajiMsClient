@@ -1,22 +1,22 @@
 <template>
-  <nav :class="{ active: navActive }">
-    <div class="nav">
-      <a class="nav__logo" href="#">
+  <nav class="c-nav" :class="{ 'c-nav--active': navActive }">
+    <div class="c-nav__container">
+      <a class="c-nav__logo" href="#">
         <img :src="navActive ? '/images/Logo_Main_2208.svg' : '/images/Logo_Main_2108.svg'" alt="logo" />
         <img :src="navActive ? '/images/Logo_Text_2208.svg' : '/images/Logo_Text_2108.svg'" alt="logo" />
       </a>
-      <div class="switch" @click.stop="IsMove" :class="{ active: IsMoveShow }">
-        <span class="line"></span>
+      <div class="c-nav__toggle" @click.stop="IsMove" :class="{ 'c-nav__toggle--active': IsMoveShow }">
+        <span class="c-nav__toggle-line"></span>
       </div>
-      <div class="nav__overlay" v-if="IsMoveShow" @click="IsMove"></div>
-      <div class="nav__menu" :class="{ active: IsMoveShow }" @click.stop="">
-        <ul :class="{ active: navActive || isDark }">
-          <li @click="IsMove"><a href="#">首页</a></li>
-          <li @click="IsMove"><a href="#about">关于</a></li>
-          <li @click="IsMove"><a href="#work">作品</a></li>
-          <li @click="IsMove"><a href="#info">日志</a></li>
-          <li @click.stop="toggleTheme">
-            <a>
+      <div class="c-nav__overlay" v-if="IsMoveShow" @click="IsMove"></div>
+      <div class="c-nav__menu" :class="{ 'c-nav__menu--active': IsMoveShow }" @click.stop="">
+        <ul class="c-nav__list" :class="{ 'c-nav__list--active': navActive || isDark }">
+          <li class="c-nav__item" @click="IsMove"><a class="c-nav__link" href="#">首页</a></li>
+          <li class="c-nav__item" @click="IsMove"><a class="c-nav__link" href="#about">关于</a></li>
+          <li class="c-nav__item" @click="IsMove"><a class="c-nav__link" href="#work">作品</a></li>
+          <li class="c-nav__item" @click="IsMove"><a class="c-nav__link" href="#info">日志</a></li>
+          <li class="c-nav__item" @click.stop="toggleTheme">
+            <a class="c-nav__link">
               <img :src="isDark ? moonIcon : sunIcon" :alt="isDark ? 'moon' : 'sun'" />
             </a>
           </li>
@@ -40,8 +40,8 @@ const IsMove = () => {
 
 // 点击非switch区域关闭switch,排除nav__menu里面的a标签
 const handleOutsideClick = (e: MouseEvent) => {
-  const switchDom = document.querySelector('.switch')
-  const navMenuDom = document.querySelector('.nav__menu')
+  const switchDom = document.querySelector('.c-nav__toggle')
+  const navMenuDom = document.querySelector('.c-nav__menu')
   const target = e.target as Node
   if (switchDom && navMenuDom && !switchDom.contains(target) && !navMenuDom.contains(target)) {
     IsMoveShow.value = false
@@ -77,30 +77,30 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-nav {
+.c-nav {
   position: fixed;
   top: 0;
   width: 100%;
   height: 100px;
   z-index: 999;
   transition: all 0.5s;
-  &.active {
+  &.c-nav--active {
     background-color: var(--nav-bg);
     box-shadow: var(--nav-shadow) 0 5px 10px;
-    .nav {
-      .nav__menu {
-        ul {
-          li {
-            a {
+    .c-nav__container {
+      .c-nav__menu {
+        .c-nav__list {
+          .c-nav__item {
+            .c-nav__link {
               color: var(--nav-text);
               &:hover {
                 background-color: var(--nav-text-hover-bg);
               }
             }
           }
-          &.active {
-            li {
-              a {
+          &.c-nav__list--active {
+            .c-nav__item {
+              .c-nav__link {
                 color: var(--nav-text-active);
               }
             }
@@ -109,14 +109,14 @@ nav {
       }
     }
   }
-  .nav {
+  .c-nav__container {
     width: 80%;
     height: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .nav__logo {
+    .c-nav__logo {
       display: flex;
       align-items: center;
       cursor: pointer;
@@ -130,21 +130,21 @@ nav {
       }
     }
 
-    .nav__menu {
+    .c-nav__menu {
       height: 50px;
       display: flex;
       align-items: center;
       justify-items: center;
-      ul {
+      .c-nav__list {
         height: 50px;
         display: flex;
-        li {
+        .c-nav__item {
           width: 70px;
           margin: 0 20px;
           display: flex;
           align-items: center;
           justify-items: center;
-          a {
+          .c-nav__link {
             width: inherit;
             height: inherit;
             text-decoration: none;
@@ -164,7 +164,7 @@ nav {
             &::after {
               display: block;
             }
-            a {
+            .c-nav__link {
               transition: 0.5s;
               background-color: rgba(0, 0, 0, 0.1);
             }
@@ -193,18 +193,18 @@ nav {
 <style lang="scss" scoped>
 // 移动端
 @media screen and (max-width: 768px) {
-  nav {
-    &.active > .nav > .switch {
+  .c-nav {
+    &.c-nav--active > .c-nav__container > .c-nav__toggle {
       z-index: 1001;
       &::before,
       &::after,
-      .line {
+      .c-nav__toggle-line {
         background-color: var(--nav-switch-color);
       }
     }
-    .nav {
+    .c-nav__container {
       position: relative;
-      .switch {
+      .c-nav__toggle {
         width: 30px;
         height: 30px;
         display: flex;
@@ -216,7 +216,7 @@ nav {
         position: relative;
         &::before,
         &::after,
-        .line {
+        .c-nav__toggle-line {
           content: '';
           width: 20px;
           height: 2px;
@@ -224,7 +224,7 @@ nav {
           position: absolute;
           transition: all 0.3s ease;
         }
-        .line {
+        .c-nav__toggle-line {
           width: 20px;
         }
         &::before {
@@ -233,8 +233,8 @@ nav {
         &::after {
           bottom: 6px;
         }
-        &.active {
-          .line {
+        &.c-nav__toggle--active {
+          .c-nav__toggle-line {
             width: 0;
             opacity: 0;
           }
@@ -249,7 +249,7 @@ nav {
         }
       }
 
-      .nav__overlay {
+      .c-nav__overlay {
         position: fixed;
         top: 0;
         left: 0;
@@ -261,7 +261,7 @@ nav {
         transition: opacity 0.3s ease;
       }
 
-      .nav__menu {
+      .c-nav__menu {
         position: fixed;
         top: 0;
         right: -70vw;
@@ -275,11 +275,11 @@ nav {
         justify-content: center;
         box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
 
-        &.active {
+        &.c-nav__menu--active {
           right: 0;
         }
 
-        ul {
+        .c-nav__list {
           width: 100%;
           height: auto;
           display: flex;
@@ -287,7 +287,7 @@ nav {
           align-items: center;
           gap: 20px;
 
-          li {
+          .c-nav__item {
             width: 80%;
             height: 50px;
             margin: 0;
@@ -295,7 +295,7 @@ nav {
             align-items: center;
             justify-content: center;
 
-            a {
+            .c-nav__link {
               width: 100%;
               height: 100%;
               text-decoration: none;

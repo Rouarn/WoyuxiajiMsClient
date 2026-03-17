@@ -1,6 +1,6 @@
 <template>
-  <div class="sakura-falling" :style="`top: ${homeHeight}px`" v-show="isBlinkingCursorShow">
-    <canvas ref="canvasRef"></canvas>
+  <div class="c-sakura-falling" :style="`top: ${homeHeight}px`" v-show="isBlinkingCursorShow">
+    <canvas ref="canvasRef" class="c-sakura-falling__canvas"></canvas>
   </div>
 </template>
 
@@ -97,7 +97,7 @@ export default defineComponent({
       }
     }
     const updateCanvasDimensions = () => {
-      const container = document.querySelector('.sakura-falling') as HTMLElement
+      const container = document.querySelector('.c-sakura-falling') as HTMLElement
       if (!container) return
       canvas.width = container.clientWidth
       canvas.height = container.clientHeight
@@ -145,7 +145,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.sakura-falling {
+.c-sakura-falling {
     position: absolute;
     top: 0;
     left: 0;
@@ -153,7 +153,7 @@ export default defineComponent({
     bottom: 0;
     width: 100%;
     pointer-events: none;
-    canvas {
+    .c-sakura-falling__canvas {
       display: block;
       width: 100%;
       height: 100%;

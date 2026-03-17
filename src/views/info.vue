@@ -1,21 +1,21 @@
 <template>
-  <div id="info">
+  <div class="c-info" id="info">
     <h1>小站大记事</h1>
     <under-line></under-line>
     <p>左右滑动来查看</p>
-    <div class="log">
-      <div class="log-list">
-        <div class="log-item"></div>
-        <div class="log-item" v-for="item in list" :key="item.id">
+    <div class="c-info__log-container">
+      <div class="c-info__log-list">
+        <div class="c-info__log-item"></div>
+        <div class="c-info__log-item" v-for="item in list" :key="item.id">
           <h2>{{ item.logTime }}</h2>
           <p>{{ item.description }}</p>
           <p v-if="item.otherText">{{ item.otherText }}</p>
         </div>
       </div>
     </div>
-    <div class="logMask" v-if="DetermineScreenWidth">
-      <span class="logMaskL"></span>
-      <span class="logMaskR"></span>
+    <div class="c-info__mask" v-if="DetermineScreenWidth">
+      <span class="c-info__mask--left"></span>
+      <span class="c-info__mask--right"></span>
     </div>
   </div>
 </template>
@@ -50,7 +50,7 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-#info {
+.c-info {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -70,7 +70,7 @@ onMounted(async () => {
     color: var(--text-primary);
     margin-top: 17px;
   }
-  .logMask {
+  .c-info__mask {
     width: 75%;
     height: 100px;
     position: absolute;
@@ -78,35 +78,35 @@ onMounted(async () => {
     display: flex;
     justify-content: space-between;
     pointer-events: none;
-    .logMaskL {
+    .c-info__mask--left {
       display: block;
       width: 150px;
       height: 100px;
       z-index: 1;
       background-image: linear-gradient(to left, rgba(255, 255, 255, 0), var(--bg-color));
     }
-    .logMaskR {
+    .c-info__mask--right {
       display: block;
       width: 150px;
       height: 100px;
       background-image: linear-gradient(to right, rgba(255, 255, 255, 0), var(--bg-color));
     }
   }
-  .log {
+  .c-info__log-container {
     width: 100%;
     height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .log-list {
+    .c-info__log-list {
       width: 150px;
       height: 1200px;
       overflow-y: scroll;
       overflow-x: hidden;
       transform: rotate(270deg);
 
-      .log-item {
+      .c-info__log-item {
         width: 300px;
         height: 282px;
         transform: rotate(90deg);
@@ -142,7 +142,7 @@ onMounted(async () => {
 <style lang="scss" scoped>
 // 移动端
 @media screen and (max-width: 1200px) {
-  #info {
+  .c-info {
     padding: 50px 0 30px 0;
     h1 {
       font-size: 20px;
@@ -150,26 +150,26 @@ onMounted(async () => {
     p {
       font-size: 10px;
     }
-    .logMask {
+    .c-info__mask {
       width: 100%;
       height: 50px;
       bottom: 30%;
-      .logMaskL {
+      .c-info__mask--left {
         width: 100px;
         height: 50px;
       }
-      .logMaskR {
+      .c-info__mask--right {
         width: 100px;
         height: 50px;
       }
     }
-    .log {
+    .c-info__log-container {
       width: 100vw;
       height: 100px;
-      .log-list {
+      .c-info__log-list {
         width: 100px;
         height: 600px;
-        .log-item {
+        .c-info__log-item {
           width: 200px;
           height: 200px;
           padding-bottom: 50px;
