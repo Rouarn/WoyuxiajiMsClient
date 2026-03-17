@@ -1,15 +1,15 @@
 <template>
-    <Nav :navClassCame="isNavActive"></Nav>
-    <Main @mainHeight="homePageHeight"></Main>
-    <blinking-cursor
-      v-if="homeHeight != 0"
-      :homeHeight="homeHeight"
-      :isBlinkingCursorShow="isBlinkingCursorShow"
-    ></blinking-cursor>
-    <About @isCherryBlossomShow="isCherryBlossomShow"></About>
-    <Work></Work>
-    <Info></Info>
-    <Footer></Footer>
+  <Nav :navClassCame="isNavActive"></Nav>
+  <Main @mainHeight="homePageHeight"></Main>
+  <blinking-cursor
+    v-if="homeHeight != 0"
+    :homeHeight="homeHeight"
+    :isBlinkingCursorShow="isBlinkingCursorShow"
+  ></blinking-cursor>
+  <About @isCherryBlossomShow="isCherryBlossomShow"></About>
+  <Work></Work>
+  <Info></Info>
+  <Footer></Footer>
 </template>
 
 <script setup lang="ts">
@@ -57,5 +57,4 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

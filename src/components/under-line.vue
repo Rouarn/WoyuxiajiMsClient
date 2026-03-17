@@ -8,7 +8,7 @@
 
 <style lang="scss" scoped>
 .c-underline {
-  .c-underline__line {
+  &__line {
     display: block;
     margin: auto;
     width: 70px;

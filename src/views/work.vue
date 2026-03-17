@@ -68,13 +68,15 @@ onMounted(async () => {
   justify-content: center;
   align-items: center;
   padding: 150px 0 100px 0;
+
   h1 {
     font-size: 30px;
     color: var(--work-title-color);
     margin-bottom: 25px;
     cursor: pointer;
   }
-  .c-work__background {
+
+  &__background {
     position: absolute;
     top: 0;
     width: 100%;
@@ -83,83 +85,84 @@ onMounted(async () => {
     z-index: -1;
   }
 
-  .c-work__list {
+  &__list {
     width: 80%;
     margin: 50px auto 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, 300px);
     gap: 50px;
     justify-content: center;
-    .c-work__card {
-      width: 100%;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: var(--card-shadow) 0 5px 10px;
-      transition: all 0.3s ease-in-out;
-      text-decoration: none;
-      &:hover {
-        box-shadow: var(--card-shadow-hover) 0 5px 20px;
-        transform: scale(1.1) translateY(-20px);
-      }
-      img {
-        width: 100%;
-        height: 155px;
-        object-fit: contain;
-        background-color: var(--card-bg);
-      }
-      .c-work__card-body {
-        height: calc(100% - 155px);
-        background-color: var(--card-bg);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px 20px;
-        .c-work__card-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 100%;
-          margin-bottom: 5px;
-        }
-        h2 {
-          font-size: 20px;
-          color: var(--card-text-title);
-          margin: 0;
-          font-size: 16px;
-          font-weight: 700;
-        }
-        p {
-          font-size: 16px;
-          color: var(--card-text-desc);
-          &:nth-child(2) {
-            margin: 1px 0 0;
-            color: var(--card-text-desc);
-            font-size: small;
-            white-space: nowrap;
-            overflow: hidden;
-            -o-text-overflow: ellipsis;
-            text-overflow: ellipsis;
-          }
-          &:nth-child(3) {
-            margin: 9px 0 0;
-            font-size: 12px;
-            color: var(--card-text-desc);
-          }
-        }
-      }
-    }
-  }
-}
 
-// 移动端给作品列表加上 flex-direction: column;
-@media screen and (max-width: 768px) {
-  .c-work {
-    .c-work__list {
+    @media screen and (max-width: 768px) {
       grid-template-columns: 1fr;
       justify-items: center;
       gap: 25px;
-      .c-work__card {
-        max-width: 100%;
+    }
+  }
+
+  &__card {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow) 0 5px 10px;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+
+    @media screen and (max-width: 768px) {
+      max-width: 100%;
+    }
+
+    &:hover {
+      box-shadow: var(--card-shadow-hover) 0 5px 20px;
+      transform: scale(1.1) translateY(-20px);
+    }
+
+    img {
+      width: 100%;
+      height: 155px;
+      object-fit: contain;
+      background-color: var(--card-bg);
+    }
+
+    &-body {
+      height: calc(100% - 155px);
+      background-color: var(--card-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px 20px;
+    }
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--card-text-title);
+      margin: 0;
+    }
+
+    p {
+      font-size: 16px;
+      color: var(--card-text-desc);
+
+      &:nth-child(2) {
+        margin: 1px 0 0;
+        font-size: small;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &:nth-child(3) {
+        margin: 9px 0 0;
+        font-size: 12px;
       }
     }
   }

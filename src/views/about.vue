@@ -55,47 +55,65 @@ emit('isCherryBlossomShow', isCherryBlossomShow.value)
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   h1 {
     font-size: 30px;
     color: var(--text-primary);
     margin-bottom: 25px;
     cursor: pointer;
+
+    @media screen and (max-width: 768px) {
+      font-size: 25px;
+    }
   }
-  .c-about__tags {
+
+  &__tags {
     margin: 25px 0 15px 0;
     width: 100%;
     height: 30px;
     text-align: center;
     line-height: 30px;
     font-size: small;
-    .c-about__tag {
-      margin: 0 5px;
-      padding: 8px 15px;
-      border-radius: 5px;
-      background-color: var(--tag-bg);
-      color: var(--tag-text);
+  }
+
+  &__tag {
+    margin: 0 5px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background-color: var(--tag-bg);
+    color: var(--tag-text);
+    box-shadow: var(--tag-shadow) 0 5px 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    @media screen and (max-width: 768px) {
+      padding: 5px 10px;
+    }
+
+    &:hover {
+      background-color: var(--tag-hover-bg);
+      color: var(--tag-hover-text);
       box-shadow: var(--tag-shadow) 0 5px 20px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      &:hover {
-        background-color: var(--tag-hover-bg);
-        color: var(--tag-hover-text);
-        box-shadow: var(--tag-shadow) 0 5px 20px;
-      }
     }
   }
 
-  .c-about__content {
+  &__content {
     text-align: center;
     cursor: pointer;
+
     p {
       margin: 14px 0;
       font-size: 15px;
       color: var(--about-text);
       font-family: '幼圆';
+
+      @media screen and (max-width: 768px) {
+        font-size: 13px;
+      }
     }
   }
 }
+
 canvas {
   position: absolute;
   top: 0;
@@ -103,26 +121,5 @@ canvas {
   z-index: 1;
   // 阻止 canvas 被鼠标事件触发
   pointer-events: none;
-}
-</style>
-
-<style lang="scss" scoped>
-// 移动端
-@media screen and (max-width: 768px) {
-  .c-about {
-    h1 {
-      font-size: 25px;
-    }
-    .c-about__tags {
-      .c-about__tag {
-        padding: 5px 10px;
-      }
-    }
-    .c-about__content {
-      p {
-        font-size: 13px;
-      }
-    }
-  }
 }
 </style>

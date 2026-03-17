@@ -84,69 +84,77 @@ onUnmounted(() => {
   position: relative;
   background: url('https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN')
     no-repeat center/cover;
-  .c-main__header {
+
+  &__header {
     position: absolute;
     top: 35%;
     width: 100%;
     height: 200px;
-    .c-main__title {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      h1 {
-        font-weight: 400;
-        font-size: 76px;
-        color: var(--main-text);
-      }
-      margin-bottom: 3px;
-    }
-    .c-main__info {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin-top: 15px;
-      .c-main__info-text {
-        & > span {
-          font-size: 15px;
-          color: var(--main-text);
-          &.c-main__cursor--blinking:nth-child(2) {
-            color: #00ff00;
-            &::after {
-              content: '';
-              display: inline-block;
-              width: 2px;
-              height: 15px;
-              background-color: var(--main-text);
-              margin: 0 5px;
-              vertical-align: middle;
-              // 闪烁效果
-              animation: blink 1s linear infinite;
-            }
+  }
 
-            @keyframes blink {
-              0% {
-                opacity: 1;
-              }
-              50% {
-                opacity: 0;
-              }
-              100% {
-                opacity: 1;
-              }
-            }
-          }
-        }
-      }
-      .c-main__info-time {
-        font-size: 16px;
+  &__title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3px;
+
+    h1 {
+      font-weight: 400;
+      font-size: 76px;
+      color: var(--main-text);
+    }
+  }
+
+  &__info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+
+    &-text {
+      & > span {
+        font-size: 15px;
         color: var(--main-text);
+      }
+    }
+
+    &-time {
+      font-size: 16px;
+      color: var(--main-text);
+    }
+  }
+
+  &__cursor--blinking {
+    color: #00ff00 !important;
+
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 2px;
+      height: 15px;
+      background-color: var(--main-text);
+      margin: 0 5px;
+      vertical-align: middle;
+      animation: blink 1s linear infinite;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
       }
     }
   }
-  .c-main__scroll-down {
+
+  &__scroll-down {
     display: block;
     position: absolute;
     left: 50%;

@@ -61,6 +61,13 @@ onUnmounted(() => {
   z-index: 1000;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
+  @media screen and (max-width: 768px) {
+    right: 20px;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+  }
+
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
@@ -68,36 +75,28 @@ onUnmounted(() => {
     color: var(--text-primary);
   }
 
-  svg {
-    transition: transform 0.3s ease;
-  }
-
   &:active {
     transform: scale(0.95);
+  }
+
+  svg {
+    transition: transform 0.3s ease;
   }
 }
 
 /* 渐变过渡动画 */
-.fade-enter-active,
-.fade-leave-active {
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
-}
+.fade {
+  &-enter-active,
+  &-leave-active {
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-/* 移动端适配 */
-@media screen and (max-width: 768px) {
-  .c-back-to-top {
-    right: 20px;
-    bottom: 20px;
-    width: 40px;
-    height: 40px;
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: translateY(20px);
   }
 }
 </style>
