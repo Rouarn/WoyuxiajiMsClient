@@ -84,21 +84,13 @@ onMounted(async () => {
 
   .workList {
     width: 80%;
-    margin-top: 50px;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
+    margin: 50px auto 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    gap: 50px;
     justify-content: center;
     a {
-      // 一行几个
-      --A-num: 4;
-      // 一个宽度
-      --A-width: 300px;
-      // 一行间距 两边
-      --A-margin: 25px;
-      width: var(--A-width);
-      // 使用 flex + margin 自动计算间距
-      margin: 25px calc((100% - var(--A-width) * var(--A-num)) / var(--A-num) / 2);
+      width: 100%;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: var(--card-shadow) 0 5px 10px;
@@ -110,7 +102,7 @@ onMounted(async () => {
       img {
         width: 100%;
         height: 155px;
-        object-fit: fill;
+        object-fit: contain;
         background-color: var(--card-bg);
       }
       .workLinkText {
@@ -161,11 +153,11 @@ onMounted(async () => {
 @media screen and (max-width: 768px) {
   #work {
     .workList {
-      flex-direction: column;
-      align-items: center;
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: 25px;
       a {
-        width: 100%;
-        margin: 25px 0;
+        max-width: 100%;
       }
     }
   }

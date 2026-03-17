@@ -1,4 +1,21 @@
 {
+  "friendshipLinks": [
+    { "text": "神剑已去，再无桎梏", "url": "#" },
+    { "text": "终焉之审判，就在此刻", "url": "#" },
+    { "text": "这是邪神的意志，是我的意志", "url": "#" },
+    { "text": "不如与我在这终末的哀歌下共舞到最后吧", "url": "#" },
+    { "text": "经一场大梦，梦中见满眼山花如翡，如见故人，喜不自胜。", "url": "#" }
+  ],
+  "contact": [
+    { "label": "我的邮箱", "url": "mailto:die3881123@163.com" },
+    { "label": "我的微博", "url": "https://weibo.com/7269276678" },
+    { "label": "我的哔哩哔哩频道", "url": "https://space.bilibili.com/340928373" }
+  ],
+  "copyright": {
+    "text": "© 2022 刘亮",
+    "linkText": "版权声明",
+    "linkUrl": "#"
+  },
   "icp": {
     "text": "豫ICP备2022024233号-6",
     "url": "https://beian.miit.gov.cn/"

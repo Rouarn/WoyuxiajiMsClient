@@ -3,11 +3,15 @@
     <div class="nav">
       <a class="nav__logo" href="#">
         <img src="/images/Logo_Main_2108.svg" alt="logo" ref="Logo_Main" />
-        <img :src="navActive ? '/images/Logo_Text_2208.svg' : '/images/Logo_Text_2108.svg'" alt="logo" ref="Logo_Text" />
+        <img
+          :src="navActive ? '/images/Logo_Text_2208.svg' : '/images/Logo_Text_2108.svg'"
+          alt="logo"
+          ref="Logo_Text"
+        />
       </a>
       <div class="switch" @click.stop="IsMove" :class="{ active: IsMoveShow }"></div>
       <div class="nav__menu" @click.stop="">
-        <ul @click.stop="">
+        <ul @click.stop="" :class="{ active: navActive || isDark }">
           <li @click.stop=""><a href="#">首页</a></li>
           <li @click.stop=""><a href="#about">关于</a></li>
           <li @click.stop=""><a href="#work">作品</a></li>
@@ -101,6 +105,13 @@ nav {
               }
             }
           }
+          &.active {
+            li {
+              a {
+                color: var(--nav-text-active);
+              }
+            }
+          }
         }
       }
     }
@@ -144,7 +155,7 @@ nav {
             width: inherit;
             height: inherit;
             text-decoration: none;
-            color: #fff;
+            color: var(--nav-text);
             font-size: 15px;
             border-radius: 5px;
             text-align: center;
@@ -270,7 +281,7 @@ nav {
                 width: 100%;
                 height: 100%;
                 text-decoration: none;
-                color: #fff;
+                color: var(--text-primary);
                 font-size: 15px;
                 border-radius: 5px;
                 text-align: center;

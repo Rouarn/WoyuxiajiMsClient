@@ -2,28 +2,26 @@
   <div id="footer">
     <div class="footer__Item">
       <p>友情链接</p>
-      <a href="#" target="_blank">神剑已去，再无桎梏</a>
-      <br />
-      <a href="#" target="_blank">终焉之审判，就在此刻</a>
-      <br />
-      <a href="#" target="_blank">这是邪神的意志，是我的意志</a>
-      <br />
-      <a href="#" target="_blank">不如与我在这终末的哀歌下共舞到最后吧</a>
-      <br />
-      <a href="#" target="_blank">经一场大梦，梦中见满眼山花如翡，如见故人，喜不自胜。</a>
+      <template v-for="(link, index) in footerInfo.friendshipLinks" :key="index">
+        <a :href="link.url" target="_blank">{{ link.text }}</a>
+        <br v-if="index !== footerInfo.friendshipLinks.length - 1" />
+      </template>
     </div>
 
     <div class="footer__Item contactme">
       <p>与我联系</p>
-      <a href="mailto:die3881123@163.com">我的邮箱</a>
-      <br />
-      <a href="https://weibo.com/7269276678" target="_blank">我的微博</a>
-      <br />
-      <a href="https://space.bilibili.com/340928373" target="_blank">我的哔哩哔哩频道</a>
+      <template v-for="(item, index) in footerInfo.contact" :key="index">
+        <a :href="item.url" :target="item.url.startsWith('mailto') ? '_self' : '_blank'">{{
+          item.label
+        }}</a>
+        <br v-if="index !== footerInfo.contact.length - 1" />
+      </template>
     </div>
     <div class="footer__Item copyright">
-      <p>© 2022 刘亮</p>
-      <a id="linkCopyright">版权声明</a>
+      <p>{{ footerInfo.copyright.text }}</p>
+      <a id="linkCopyright" :href="footerInfo.copyright.linkUrl">{{
+        footerInfo.copyright.linkText
+      }}</a>
       <br />
       <a href="#" class="pentagram">☆☆☆☆☆</a>
       <br />
@@ -41,6 +39,9 @@
 import { onMounted, reactive } from 'vue'
 
 const footerInfo = reactive({
+  friendshipLinks: [] as { text: string; url: string }[],
+  contact: [] as { label: string; url: string }[],
+  copyright: { text: '', linkText: '', linkUrl: '' },
   icp: { text: '', url: '' },
   beian: { text: '', url: '' },
 })
@@ -52,6 +53,9 @@ onMounted(async () => {
       throw new Error('Network response was not ok')
     }
     const data = await response.json()
+    footerInfo.friendshipLinks = data.friendshipLinks
+    footerInfo.contact = data.contact
+    footerInfo.copyright = data.copyright
     footerInfo.icp = data.icp
     footerInfo.beian = data.beian
   } catch (error) {

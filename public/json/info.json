@@ -1,50 +1,32 @@
 [
   {
     "id": 1,
-    "logTime": "2022-01-01",
-    "description": "小站建立",
-    "otherText": "一个平平无奇的开始"
+    "logTime": "2021-08-15",
+    "description": "项目初始化",
+    "otherText": "使用 Vue 2.x 版本开启项目原型设计"
   },
   {
     "id": 2,
-    "logTime": "2022-01-02",
-    "description": "小站升级",
-    "otherText": "加入了新的功能"
+    "logTime": "2022-03-20",
+    "description": "响应式布局优化",
+    "otherText": "全面适配移动端，优化移动端导航栏交互"
   },
   {
     "id": 3,
-    "logTime": "2022-01-03",
-    "description": "小站升级",
-    "otherText": "加入了新的功能"
+    "logTime": "2024-12-10",
+    "description": "技术栈全面升级",
+    "otherText": "迁移至 Vue 3 + TypeScript + Vite"
   },
   {
     "id": 4,
-    "logTime": "2022-01-04",
-    "description": "小站升级",
-    "otherText": "加入了新的功能"
+    "logTime": "2026-03-1",
+    "description": "深色模式上线",
+    "otherText": "集成 Pinia 状态管理及持久化存储"
   },
   {
     "id": 5,
-    "logTime": "2022-01-05",
-    "description": "小站升级",
-    "otherText": "加入了新的功能"
-  },
-  {
-    "id": 6,
-    "logTime": "2022-01-06",
-    "description": "小站升级",
-    "otherText": "加入了新的功能"
-  },
-  {
-    "id": 7,
-    "logTime": "2022-01-07",
-    "description": "小站升级",
-    "otherText": "加入了新的功能"
-  },
-  {
-    "id": 8,
-    "logTime": "2022-01-08",
-    "description": "小站升级",
-    "otherText": "加入了新的功能"
+    "logTime": "2026-03-17",
+    "description": "UI 细节打磨",
+    "otherText": "优化作品列表 Grid 布局及全局 CSS 变量"
   }
 ]
