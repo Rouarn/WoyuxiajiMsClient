@@ -31,13 +31,13 @@
     "Introduce": "一个优雅且功能强大的前台模板",
     "url": "http://150.158.128.228:8849"
   },
-    {
+  {
     "id": 5,
     "title": "贪吃蛇",
-    "pic": "http://static.shixian.xyz/files/default/WeChat/greedySnake.png",
+    "pic": "https://static.shixian.xyz/api/files/default/WeChat/greedySnake.png",
     "platform": "微信小程序",
     "Introduce": "一个像素风的贪吃蛇游戏",
-    "url": "http://static.shixian.xyz/files/default/WeChat/greedySnake.png"
+    "url": "https://static.shixian.xyz/api/files/default/WeChat/greedySnake.png"
   },
   {
     "id": 6,
