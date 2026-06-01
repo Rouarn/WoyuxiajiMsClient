@@ -1,6 +1,6 @@
 <template>
-  <div class="c-footer" id="footer">
-    <div class="c-footer__item">
+  <div class="c-footer" id="footer" ref="footerRef">
+    <div class="c-footer__item" ref="friendshipRef">
       <p>友情链接</p>
       <template v-for="(link, index) in footerInfo.friendshipLinks" :key="index">
         <a :href="link.url" target="_blank">{{ link.text }}</a>
@@ -8,7 +8,7 @@
       </template>
     </div>
 
-    <div class="c-footer__item c-footer__item--contact">
+    <div class="c-footer__item c-footer__item--contact" ref="contactRef">
       <p>与我联系</p>
       <template v-for="(item, index) in footerInfo.contact" :key="index">
         <a :href="item.url" :target="item.url.startsWith('mailto') ? '_self' : '_blank'">{{
@@ -17,7 +17,7 @@
         <br v-if="index !== footerInfo.contact.length - 1" />
       </template>
     </div>
-    <div class="c-footer__item c-footer__item--copyright">
+    <div class="c-footer__item c-footer__item--copyright" ref="copyrightRef">
       <p>{{ footerInfo.copyright.text }}</p>
       <a id="linkCopyright" :href="footerInfo.copyright.linkUrl">{{
         footerInfo.copyright.linkText
@@ -36,7 +36,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref, nextTick } from 'vue'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const footerRef = ref<HTMLElement | null>(null)
+const friendshipRef = ref<HTMLElement | null>(null)
+const contactRef = ref<HTMLElement | null>(null)
+const copyrightRef = ref<HTMLElement | null>(null)
 
 const footerInfo = reactive({
   friendshipLinks: [] as { text: string; url: string }[],
@@ -58,6 +67,34 @@ onMounted(async () => {
     footerInfo.copyright = data.copyright
     footerInfo.icp = data.icp
     footerInfo.beian = data.beian
+
+    await nextTick()
+
+    gsap.fromTo(
+      [friendshipRef.value, contactRef.value, copyrightRef.value],
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: footerRef.value,
+          start: 'top 90%',
+          toggleActions: 'play none none reverse',
+        },
+      },
+    )
+
+    document.querySelectorAll('.c-footer a').forEach((link) => {
+      link.addEventListener('mouseenter', () => {
+        gsap.to(link, { scale: 1.1, color: '#ff6b9d', duration: 0.2, ease: 'power2.out' })
+      })
+      link.addEventListener('mouseleave', () => {
+        gsap.to(link, { scale: 1, color: 'inherit', duration: 0.2, ease: 'power2.out' })
+      })
+    })
   } catch (error) {
     console.error('Failed to fetch footer.json:', error)
   }

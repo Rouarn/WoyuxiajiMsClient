@@ -1,7 +1,7 @@
 <template>
-  <div class="c-work" id="work">
-    <h1>我的作品</h1>
-    <under-line></under-line>
+  <div class="c-work" id="work" ref="workRef">
+    <h1 ref="titleRef">我的作品</h1>
+    <under-line ref="lineRef"></under-line>
     <div class="c-work__background"></div>
     <div class="c-work__list" ref="workList" v-if="list">
       <a
@@ -12,7 +12,7 @@
         class="c-work__card"
         :class="{ 'c-work__card--last': index === list.length - 1 }"
       >
-        <img :src="item.pic" :alt="item.title" />
+        <img :src="item.pic" :alt="item.title" class="c-work__card-image" />
         <div class="c-work__card-body">
           <div class="c-work__card-header">
             <h2>{{ item.title }}</h2>
@@ -26,10 +26,18 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref, nextTick } from 'vue'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import UnderLine from '@/components/under-line.vue'
 
-// 请求作品列表
+gsap.registerPlugin(ScrollTrigger)
+
+const workRef = ref<HTMLElement | null>(null)
+const titleRef = ref<HTMLElement | null>(null)
+const lineRef = ref<HTMLElement | null>(null)
+const workList = ref<HTMLElement | null>(null)
+
 const list = reactive<
   {
     id: number
@@ -41,7 +49,6 @@ const list = reactive<
   }[]
 >([])
 
-// 页面挂载前请求作品列表
 onMounted(async () => {
   try {
     const response = await fetch('/json/work.json')
@@ -54,6 +61,67 @@ onMounted(async () => {
         pic: new URL(item.pic, import.meta.url).href,
       })),
     )
+
+    await nextTick()
+
+    gsap.fromTo(
+      titleRef.value,
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: workRef.value,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+      },
+    )
+
+    gsap.fromTo(
+      lineRef.value,
+      { scaleX: 0, opacity: 0 },
+      {
+        scaleX: 1,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: workRef.value,
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+        },
+      },
+    )
+
+    gsap.fromTo(
+      '.c-work__card',
+      { y: 60, opacity: 0, rotateX: -10 },
+      {
+        y: 0,
+        opacity: 1,
+        rotateX: 0,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: workList.value,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse',
+        },
+      },
+    )
+
+    document.querySelectorAll('.c-work__card').forEach((card) => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, { y: -15, scale: 1.05, duration: 0.3, ease: 'power2.out' })
+      })
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, { y: 0, scale: 1, duration: 0.3, ease: 'power2.out' })
+      })
+    })
   } catch (error) {
     console.error('Failed to fetch work.json:', error)
   }

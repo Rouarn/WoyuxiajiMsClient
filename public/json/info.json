@@ -28,5 +28,11 @@
     "logTime": "2026-03-17",
     "description": "UI 细节打磨",
     "otherText": "优化作品列表 Grid 布局及全局 CSS 变量"
+  },
+  {
+    "id": 6,
+    "logTime": "2026-06-1",
+    "description": "添加 GSAP 动画效果",
+    "otherText": ""
   }
 ]

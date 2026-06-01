@@ -1,9 +1,9 @@
 <template>
-  <div class="c-info" id="info">
-    <h1>小站大记事</h1>
-    <under-line></under-line>
-    <p>左右滑动来查看</p>
-    <div class="c-info__log-container">
+  <div class="c-info" id="info" ref="infoRef">
+    <h1 ref="titleRef">小站大记事</h1>
+    <under-line ref="lineRef"></under-line>
+    <p ref="hintRef">左右滑动来查看</p>
+    <div class="c-info__log-container" ref="containerRef">
       <div
         class="c-info__log-list"
         ref="scrollContainer"
@@ -26,7 +26,17 @@
 
 <script setup lang="ts">
 import UnderLine from '@/components/under-line.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, nextTick } from 'vue'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const infoRef = ref<HTMLElement | null>(null)
+const titleRef = ref<HTMLElement | null>(null)
+const lineRef = ref<HTMLElement | null>(null)
+const hintRef = ref<HTMLElement | null>(null)
+const containerRef = ref<HTMLElement | null>(null)
 
 const list = ref<
   {
@@ -45,7 +55,6 @@ const handleWheel = (event: WheelEvent) => {
   }
 }
 
-// 鼠标拖拽滚动逻辑
 const isDragging = ref(false)
 const startX = ref(0)
 const initialScrollLeft = ref(0)
@@ -64,7 +73,7 @@ const onDragging = (e: MouseEvent) => {
   if (!isDragging.value || !scrollContainer.value) return
   e.preventDefault()
   const x = e.pageX - (scrollContainer.value?.offsetLeft || 0)
-  const walk = (x - startX.value) * 2 // 滚动系数，可调整
+  const walk = (x - startX.value) * 2
   scrollContainer.value.scrollLeft = initialScrollLeft.value - walk
 }
 
@@ -75,6 +84,82 @@ onMounted(async () => {
       throw new Error('Network response was not ok')
     }
     list.value = await response.json()
+
+    await nextTick()
+
+    gsap.fromTo(
+      titleRef.value,
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: infoRef.value,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+      },
+    )
+
+    gsap.fromTo(
+      lineRef.value,
+      { scaleX: 0, opacity: 0 },
+      {
+        scaleX: 1,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: infoRef.value,
+          start: 'top 75%',
+          toggleActions: 'play none none reverse',
+        },
+      },
+    )
+
+    gsap.fromTo(
+      hintRef.value,
+      { y: 20, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: infoRef.value,
+          start: 'top 70%',
+          toggleActions: 'play none none reverse',
+        },
+      },
+    )
+
+    gsap.fromTo(
+      '.c-info__log-item:not(:first-child)',
+      { scale: 0.8, opacity: 0 },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: containerRef.value,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse',
+        },
+      },
+    )
+
+    document.querySelectorAll('.c-info__log-item:not(:first-child)').forEach((item) => {
+      item.addEventListener('mouseenter', () => {
+        gsap.to(item, { scale: 1.08, duration: 0.3, ease: 'power2.out' })
+      })
+      item.addEventListener('mouseleave', () => {
+        gsap.to(item, { scale: 1, duration: 0.3, ease: 'power2.out' })
+      })
+    })
   } catch (error) {
     console.error('Failed to fetch info.json:', error)
   }

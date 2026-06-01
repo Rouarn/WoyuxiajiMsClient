@@ -1,37 +1,53 @@
 <template>
-  <div class="c-about" id="about">
-    <h1>关于我</h1>
-    <under-line></under-line>
-    <div class="c-about__tags">
-      <span class="c-about__tag">00后</span>
-      <span class="c-about__tag">WYXJ</span>
-      <span class="c-about__tag">YXNYG</span>
-      <span class="c-about__tag">小黑子</span>
-      <span class="c-about__tag" @click="toggleCherryBlossom">{{ blossomButtonText }}</span>
+  <div class="c-about" id="about" ref="aboutRef">
+    <h1 ref="titleRef">关于我</h1>
+    <under-line ref="lineRef"></under-line>
+    <div class="c-about__tags" ref="tagsRef">
+      <span class="c-about__tag" v-for="(tag, index) in tags" :key="tag" :data-index="index">
+        {{ tag }}
+      </span>
+      <span class="c-about__tag cherry-tag" @click="toggleCherryBlossom">{{
+        blossomButtonText
+      }}</span>
     </div>
-    <div class="c-about__content">
-      <p>嗨,我是刘靓仔。</p>
-      <p>一个练习时长两年半的前端艺术家</p>
-      <p>同时也是一名音乐爱好者、白日梦想家</p>
-      <p>某知名视频站的不知名UP主</p>
-      <p>强迫症、拖延症、懒癌晚期</p>
-      <p>PS:(这都不是真的,我非常的勤奋好学,真的)</p>
-      <p>在郑州度过最SB的高中三年</p>
-      <p>现就读于河南某大学软件系</p>
-      <p>热衷钻研与计算机有关的一切：</p>
-      <p>前端开发、平面设计、视频剪辑、吹牛逼等...</p>
-      <p>近期白日梦想：富婆包养我!</p>
-      <p>带着相机和好心情 与喜欢的人环游世界</p>
-      <p>请多指教！</p>
+    <div class="c-about__content" ref="contentRef">
+      <p v-for="(text, index) in content" :key="index" :data-index="index">{{ text }}</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import UnderLine from '@/components/under-line.vue'
 
-// 控制樱花飘落是否显示
+gsap.registerPlugin(ScrollTrigger)
+
+const aboutRef = ref<HTMLElement | null>(null)
+const titleRef = ref<HTMLElement | null>(null)
+const lineRef = ref<HTMLElement | null>(null)
+const tagsRef = ref<HTMLElement | null>(null)
+const contentRef = ref<HTMLElement | null>(null)
+
+const tags = ['00后', 'WYXJ', 'YXNYG', '小黑子']
+
+const content = [
+  '嗨,我是刘靓仔。',
+  '一个练习时长两年半的前端艺术家',
+  '同时也是一名音乐爱好者、白日梦想家',
+  '某知名视频站的不知名UP主',
+  '强迫症、拖延症、懒癌晚期',
+  'PS:(这都不是真的,我非常的勤奋好学,真的)',
+  '在郑州度过最SB的高中三年',
+  '现就读于河南某大学软件系',
+  '热衷钻研与计算机有关的一切：',
+  '前端开发、平面设计、视频剪辑、吹牛逼等...',
+  '近期白日梦想：富婆包养我!',
+  '带着相机和好心情 与喜欢的人环游世界',
+  '请多指教！',
+]
+
 const isCherryBlossomShow = ref(true)
 const blossomButtonText = computed(() =>
   isCherryBlossomShow.value ? '关闭樱花飘落' : '开启樱花飘落',
@@ -43,8 +59,84 @@ const toggleCherryBlossom = () => {
   emit('isCherryBlossomShow', isCherryBlossomShow.value)
 }
 
-// 初始化时通知父组件
-emit('isCherryBlossomShow', isCherryBlossomShow.value)
+onMounted(() => {
+  gsap.fromTo(
+    titleRef.value,
+    { y: 50, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: aboutRef.value,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
+      },
+    },
+  )
+
+  gsap.fromTo(
+    lineRef.value,
+    { scaleX: 0, opacity: 0 },
+    {
+      scaleX: 1,
+      opacity: 1,
+      duration: 0.6,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: aboutRef.value,
+        start: 'top 75%',
+        toggleActions: 'play none none reverse',
+      },
+    },
+  )
+
+  gsap.fromTo(
+    '.c-about__tag',
+    { y: 30, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 0.5,
+      stagger: 0.1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: tagsRef.value,
+        start: 'top 85%',
+        toggleActions: 'play none none reverse',
+      },
+    },
+  )
+
+  gsap.fromTo(
+    '.c-about__content p',
+    { x: -30, opacity: 0 },
+    {
+      x: 0,
+      opacity: 1,
+      duration: 0.5,
+      stagger: 0.08,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: contentRef.value,
+        start: 'top 85%',
+        toggleActions: 'play none none reverse',
+      },
+    },
+  )
+
+  document.querySelectorAll('.c-about__tag').forEach((tag) => {
+    tag.addEventListener('mouseenter', () => {
+      gsap.to(tag, { scale: 1.15, rotation: 3, duration: 0.3, ease: 'power2.out' })
+    })
+    tag.addEventListener('mouseleave', () => {
+      gsap.to(tag, { scale: 1, rotation: 0, duration: 0.3, ease: 'power2.out' })
+    })
+  })
+
+  emit('isCherryBlossomShow', isCherryBlossomShow.value)
+})
 </script>
 
 <style lang="scss" scoped>

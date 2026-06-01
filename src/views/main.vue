@@ -1,11 +1,11 @@
 <template>
   <div class="c-main" ref="main">
     <div class="c-main__header">
-      <div class="c-main__title">
+      <div class="c-main__title" ref="titleRef">
         <h1>我与夏季.</h1>
       </div>
       <UnderLine></UnderLine>
-      <div class="c-main__info">
+      <div class="c-main__info" ref="infoRef">
         <div class="c-main__info-text">
           <span>/*&nbsp;</span>
           <span :class="{ 'c-main__cursor--blinking': blinkingCursor }">{{ introduce }}</span>
@@ -14,26 +14,29 @@
         <div class="c-main__info-time">{{ currentTime }}</div>
       </div>
     </div>
-    <div class="c-main__scroll-down" @click="scrollAbouta"></div>
+    <div class="c-main__scroll-down" @click="scrollAbouta" ref="scrollDownRef"></div>
   </div>
 </template>
 
 <script setup lang="ts">
 import dayjs from 'dayjs'
 import { onMounted, onUnmounted, ref } from 'vue'
+import gsap from 'gsap'
 import UnderLine from '@/components/under-line.vue'
 
 const scrollAbouta = () => {
   window.scrollTo({
-    top: window.innerHeight, // 滚动到指定的位置
+    top: window.innerHeight,
     behavior: 'smooth',
   })
 }
 
 const main = ref<HTMLElement | null>(null)
+const titleRef = ref<HTMLElement | null>(null)
+const infoRef = ref<HTMLElement | null>(null)
+const scrollDownRef = ref<HTMLElement | null>(null)
 const mainEmits = defineEmits(['mainHeight'])
 
-// 打字机效果
 const introduce = ref('')
 const blinkingCursor = ref(true)
 const currentTime = ref('')
@@ -50,7 +53,33 @@ onMounted(() => {
   updateHeight()
   window.addEventListener('resize', updateHeight)
 
-  // Typewriter effect
+  gsap.fromTo(
+    titleRef.value,
+    { y: -50, opacity: 0, scale: 0.8 },
+    { y: 0, opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out', delay: 0.3 },
+  )
+
+  gsap.fromTo(
+    infoRef.value,
+    { y: 30, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.8 },
+  )
+
+  gsap.fromTo(
+    scrollDownRef.value,
+    { y: -20, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      ease: 'power2.out',
+      delay: 1.2,
+      yoyo: true,
+      repeat: -1,
+      repeatDelay: 1,
+    },
+  )
+
   let i = 0
   const str = '这里是刘靓仔的个人主页'
   typewriterTimer = window.setInterval(() => {
@@ -64,7 +93,6 @@ onMounted(() => {
     }
   }, 300)
 
-  // Clock
   clockTimer = window.setInterval(() => {
     currentTime.value = dayjs().format('今天是YYYY年MM月DD日HH:mm:ss')
   }, 1000)

@@ -38,17 +38,17 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
+import gsap from 'gsap'
 import moonIcon from '@/assets/images/TB-Jerry-moon.svg'
 import sunIcon from '@/assets/images/TB-Tom-sun.svg'
 import { useThemeStore } from '@/stores/theme'
 import { storeToRefs } from 'pinia'
-// 移动端导航栏效果
+
 const IsMoveShow = ref(false)
 const IsMove = () => {
   IsMoveShow.value = !IsMoveShow.value
 }
 
-// 点击非switch区域关闭switch,排除nav__menu里面的a标签
 const handleOutsideClick = (e: MouseEvent) => {
   const switchDom = document.querySelector('.c-nav__toggle')
   const navMenuDom = document.querySelector('.c-nav__menu')
@@ -60,13 +60,43 @@ const handleOutsideClick = (e: MouseEvent) => {
 
 onMounted(() => {
   document.addEventListener('click', handleOutsideClick)
+
+  gsap.fromTo(
+    '.c-nav__logo',
+    { x: -50, opacity: 0 },
+    { x: 0, opacity: 1, duration: 0.8, ease: 'power2.out', delay: 0.5 },
+  )
+
+  gsap.fromTo(
+    '.c-nav__item',
+    { y: -20, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out', delay: 0.7 },
+  )
+
+  document.querySelectorAll('.c-nav__link').forEach((link) => {
+    link.addEventListener('mouseenter', () => {
+      gsap.to(link, {
+        y: -3,
+        color: '#00ff00',
+        duration: 0.2,
+        ease: 'power2.out',
+      })
+    })
+    link.addEventListener('mouseleave', () => {
+      gsap.to(link, {
+        y: 0,
+        color: '',
+        duration: 0.2,
+        ease: 'power2.out',
+      })
+    })
+  })
 })
 
 onUnmounted(() => {
   document.removeEventListener('click', handleOutsideClick)
 })
 
-// 监视器watch
 const props = defineProps({
   navClassCame: {
     type: Boolean,
