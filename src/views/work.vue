@@ -1,17 +1,11 @@
 <template>
   <div class="c-work" id="work" ref="workRef">
-    <h1 ref="titleRef">我的作品</h1>
+    <h1>我的作品</h1>
     <under-line ref="lineRef"></under-line>
     <div class="c-work__background"></div>
     <div class="c-work__list" ref="workList" v-if="list">
-      <a
-        :href="item.url"
-        target="_blank"
-        v-for="(item, index) in list"
-        :key="item.id"
-        class="c-work__card"
-        :class="{ 'c-work__card--last': index === list.length - 1 }"
-      >
+      <a :href="item.url" target="_blank" v-for="(item, index) in list" :key="item.id" class="c-work__card"
+        :class="{ 'c-work__card--last': index === list.length - 1 }">
         <img :src="item.pic" :alt="item.title" class="c-work__card-image" />
         <div class="c-work__card-body">
           <div class="c-work__card-header">
@@ -34,7 +28,6 @@ import UnderLine from '@/components/under-line.vue'
 gsap.registerPlugin(ScrollTrigger)
 
 const workRef = ref<HTMLElement | null>(null)
-const titleRef = ref<HTMLElement | null>(null)
 const lineRef = ref<HTMLElement | null>(null)
 const workList = ref<HTMLElement | null>(null)
 
@@ -65,22 +58,6 @@ onMounted(async () => {
     await nextTick()
 
     gsap.fromTo(
-      titleRef.value,
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: workRef.value,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse',
-        },
-      },
-    )
-
-    gsap.fromTo(
       lineRef.value,
       { scaleX: 0, opacity: 0 },
       {
@@ -98,11 +75,9 @@ onMounted(async () => {
 
     gsap.fromTo(
       '.c-work__card',
-      { y: 60, opacity: 0, rotateX: -10 },
+      { opacity: 0 },
       {
-        y: 0,
         opacity: 1,
-        rotateX: 0,
         duration: 0.6,
         stagger: 0.15,
         ease: 'power3.out',
