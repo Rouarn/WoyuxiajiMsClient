@@ -4,8 +4,14 @@
     <under-line ref="lineRef"></under-line>
     <div class="c-work__background"></div>
     <div class="c-work__list" ref="workList" v-if="list">
-      <a :href="item.url" target="_blank" v-for="(item, index) in list" :key="item.id" class="c-work__card"
-        :class="{ 'c-work__card--last': index === list.length - 1 }">
+      <a
+        :href="item.url"
+        target="_blank"
+        v-for="(item, index) in list"
+        :key="item.id"
+        class="c-work__card"
+        :class="{ 'c-work__card--last': index === list.length - 1 }"
+      >
         <img :src="item.pic" :alt="item.title" class="c-work__card-image" />
         <div class="c-work__card-body">
           <div class="c-work__card-header">
