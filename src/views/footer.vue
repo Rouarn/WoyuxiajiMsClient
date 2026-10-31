@@ -27,7 +27,7 @@
       <br />
       <a :href="footerInfo.icp.url" target="_blank">{{ footerInfo.icp.text }}</a>
       <br />
-      <span class="c-footer__beian">
+      <span v-if="footerInfo.beian.text" class="c-footer__beian">
         <img src="@/assets/images/beian.png" alt="豫公网安备" class="c-footer__beian-img" />
         <a :href="footerInfo.beian.url" target="_blank">{{ footerInfo.beian.text }}</a>
       </span>

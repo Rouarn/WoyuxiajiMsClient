@@ -17,11 +17,11 @@
     "linkUrl": "#"
   },
   "icp": {
-    "text": "豫ICP备2022024233号-6",
+    "text": "豫ICP备2026046995号-1",
     "url": "https://beian.miit.gov.cn/"
   },
   "beian": {
-    "text": "豫公网安备 41172102000222号",
-    "url": "http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41172102000222"
+    "text": "",
+    "url": "http://www.beian.gov.cn/portal/registerSystemInfo?recordcode="
   }
 }
